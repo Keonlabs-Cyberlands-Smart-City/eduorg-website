@@ -1,12 +1,12 @@
 import { Link } from "wouter";
 
 const programs = [
-  { name: "Bootcamps", desc: "Academic intensive programs", img: "https://images.unsplash.com/photo-1588072432836-e10032774350", link: "/bootcamp" },
-  { name: "Sports", desc: "Games and physical activities", img: "https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf", link: "/sports" },
-  { name: "Clubs", desc: "ICT, literacy and social clubs", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f", link: "/clubs" },
-  { name: "Outreach Visits", desc: "Community engagement programs", img: "https://images.unsplash.com/photo-1521791136064-7986c2920216", link: "/outreach" },
-  { name: "Day-in Visits", desc: "Daily school engagement", img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b", link: "/dayin" },
-  { name: "Library", desc: "Books and resources", img: "https://images.unsplash.com/photo-1512820790803-83ca734da794", link: "/library" },
+  { name: "Bootcamps", desc: "Academic intensive programs", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg", link: "/bootcamp" },
+  { name: "Sports", desc: "Games and physical activities", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/sports images_52357345.jpg", link: "/sports" },
+  { name: "Clubs", desc: "ICT, literacy and social clubs", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Chess club image_e4319a63.jpg", link: "/clubs" },
+  { name: "Outreach Visits", desc: "Community engagement programs", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/managers 1_88b8b087.jpg", link: "/outreach" },
+  { name: "Day-in Visits", desc: "Daily school engagement", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg", link: "/dayin" },
+  { name: "Library", desc: "Books and resources", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Library image_54c70572.jpg", link: "/library" },
 ];
 
 const teachers = [
@@ -18,12 +18,12 @@ const teachers = [
 ];
 
 const managers = [
-  { name: "Manager 1", role: "Operations", img: "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126" },
-  { name: "Manager 2", role: "Programs", img: "https://images.unsplash.com/photo-1527980965255-d3b416303d12" },
-  { name: "Manager 3", role: "Finance", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e" },
-  { name: "Manager 4", role: "HR", img: "https://images.unsplash.com/photo-1511367461989-f85a21fda167" },
-  { name: "Manager 5", role: "Logistics", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2" },
-  { name: "Manager 6", role: "Administration", img: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" },
+  { name: "Manager 1", role: "Operations", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/manager 2_557f98ee.jpg" },
+  { name: "Manager 2", role: "Programs", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/managers 1_88b8b087.jpg" },
+  { name: "Manager 3", role: "Finance", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/manager 2_557f98ee.jpg" },
+  { name: "Manager 4", role: "HR", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/managers 1_88b8b087.jpg" },
+  { name: "Manager 5", role: "Logistics", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/manager 2_557f98ee.jpg" },
+  { name: "Manager 6", role: "Administration", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/managers 1_88b8b087.jpg" },
 ];
 
 const coordinators = [
@@ -51,7 +51,7 @@ export default function Home() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="h-[500px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1523240795612-9a054b0db644')" }}>
+      <section className="h-[500px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg')" }}>
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-5xl font-bold mb-4">Empowering Education</h2>
           <p className="mb-4">Daily activities, bootcamps, clubs and more</p>

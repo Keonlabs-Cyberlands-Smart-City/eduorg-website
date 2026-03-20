@@ -16,9 +16,9 @@ export default function Bootcamp() {
   ];
 
   const gallery = [
-    "https://images.unsplash.com/photo-1523240795612-9a054b0db644",
-    "https://images.unsplash.com/photo-1509062522246-3755977927d7",
-    "https://images.unsplash.com/photo-1513258496099-48168024aec0",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/day in images 2_ced30474.jpg",
   ];
 
   return (
@@ -26,7 +26,7 @@ export default function Bootcamp() {
       <Navbar />
 
       {/* HERO */}
-      <section className="h-[400px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1523240795612-9a054b0db644')" }}>
+      <section className="h-[400px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg')" }}>
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-4xl font-bold">Bootcamp Program</h2>
           <p>Impacting students through education and outreach</p>

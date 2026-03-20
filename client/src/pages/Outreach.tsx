@@ -25,7 +25,8 @@ export default function Outreach() {
     <div className="min-h-screen flex flex-col bg-gray-100 font-sans">
       <Navbar />
 
-      {/* HERO */}\n      <section className="h-[400px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521791136064-7986c2920216')" }}>
+      {/* HERO */}
+      <section className="h-[400px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/managers 1_88b8b087.jpg')" }}>
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-4xl font-bold">Outreach Program</h2>
           <p>Empowering communities through engagement</p>

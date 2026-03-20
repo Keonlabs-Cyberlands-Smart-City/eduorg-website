@@ -26,7 +26,7 @@ export default function Sports() {
       <Navbar />
 
       {/* HERO */}
-      <section className="h-[400px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf')" }}>
+      <section className="h-[400px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/sports images_52357345.jpg')" }}>
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-4xl font-bold">Sports Program</h2>
           <p>Building champions through sports and teamwork</p>
