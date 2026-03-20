@@ -51,8 +51,8 @@ export default function Sports() {
 
   const gallery = [
     "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/sports images_52357345.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/sports images_52357345.jpg",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/sports images_52357345.jpg",
   ];
 
   return (
@@ -69,7 +69,7 @@ export default function Sports() {
       >
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-4xl font-bold">Sports Program</h2>
-          <p>Building champions through sports and teamwork</p>
+          <p>Games and physical activities for healthy development</p>
         </div>
       </section>
 

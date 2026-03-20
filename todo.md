@@ -106,3 +106,17 @@
 - [x] Day-in page loads posts from Firestore
 - [x] Outreach page loads posts from Firestore
 - [x] Real-time updates when admin creates posts
+
+
+## Image Organization by Program
+
+### Image Mapping
+- [x] Main page image → Home hero, Bootcamp hero, Bootcamp gallery
+- [x] Sports images → Sports hero, Sports gallery
+- [x] Chess club image → Clubs hero, Clubs gallery
+- [x] Library image → Library hero, Library gallery
+- [x] Day in images (1 & 2) → Day-in hero, Day-in gallery
+- [x] Manager images → Outreach hero, Outreach gallery, Team section
+- [x] Ensure all gallery images match program theme
+- [x] Update Home page program cards with correct images
+- [x] Update team member profile images appropriately

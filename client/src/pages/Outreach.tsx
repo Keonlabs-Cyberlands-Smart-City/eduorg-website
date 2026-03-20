@@ -50,9 +50,9 @@ export default function Outreach() {
   };
 
   const gallery = [
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/manager 2_557f98ee.jpg",
     "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/managers 1_88b8b087.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/manager 2_557f98ee.jpg",
   ];
 
   return (
@@ -64,12 +64,12 @@ export default function Outreach() {
         className="h-[400px] bg-cover bg-center flex items-center justify-center text-white"
         style={{
           backgroundImage:
-            "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/managers 1_88b8b087.jpg')",
+            "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/manager 2_557f98ee.jpg')",
         }}
       >
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-4xl font-bold">Outreach Program</h2>
-          <p>Empowering communities through engagement</p>
+          <p>Empowering communities through engagement and support</p>
         </div>
       </section>
 

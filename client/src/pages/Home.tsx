@@ -5,16 +5,16 @@ const programs = [
   { name: "Sports", desc: "Games and physical activities", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/sports images_52357345.jpg", link: "/sports" },
   { name: "Clubs", desc: "ICT, literacy and social clubs", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Chess club image_e4319a63.jpg", link: "/clubs" },
   { name: "Outreach Visits", desc: "Community engagement programs", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/managers 1_88b8b087.jpg", link: "/outreach" },
-  { name: "Day-in Visits", desc: "Daily school engagement", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg", link: "/dayin" },
+  { name: "Day-in Visits", desc: "Daily school engagement", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/day in images 2_ced30474.jpg", link: "/dayin" },
   { name: "Library", desc: "Books and resources", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Library image_54c70572.jpg", link: "/library" },
 ];
 
 const teachers = [
-  { name: "Teacher 1", role: "Mathematics", img: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6" },
-  { name: "Teacher 2", role: "Science", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956" },
-  { name: "Teacher 3", role: "English", img: "https://images.unsplash.com/photo-1607746882042-944635dfe10e" },
-  { name: "Teacher 4", role: "ICT", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1" },
-  { name: "Teacher 5", role: "General Studies", img: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e" },
+  { name: "Teacher 1", role: "Mathematics", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg" },
+  { name: "Teacher 2", role: "Science", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg" },
+  { name: "Teacher 3", role: "English", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Library image_54c70572.jpg" },
+  { name: "Teacher 4", role: "ICT", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/day in images 2_ced30474.jpg" },
+  { name: "Teacher 5", role: "General Studies", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Chess club image_e4319a63.jpg" },
 ];
 
 const managers = [
@@ -27,10 +27,10 @@ const managers = [
 ];
 
 const coordinators = [
-  { name: "Coordinator 1", role: "ICT Club", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f" },
-  { name: "Coordinator 2", role: "Literacy Club", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1" },
-  { name: "Coordinator 3", role: "Sports Club", img: "https://images.unsplash.com/photo-1502767089025-6572583495b0" },
-  { name: "Coordinator 4", role: "Community Club", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330" },
+  { name: "Coordinator 1", role: "ICT Club", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Chess club image_e4319a63.jpg" },
+  { name: "Coordinator 2", role: "Literacy Club", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Library image_54c70572.jpg" },
+  { name: "Coordinator 3", role: "Sports Club", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/sports images_52357345.jpg" },
+  { name: "Coordinator 4", role: "Community Club", img: "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg" },
 ];
 
 export default function Home() {

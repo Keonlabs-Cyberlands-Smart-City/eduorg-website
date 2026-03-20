@@ -51,8 +51,8 @@ export default function Bootcamp() {
 
   const gallery = [
     "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/day in images 2_ced30474.jpg",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
   ];
 
   return (
@@ -69,7 +69,7 @@ export default function Bootcamp() {
       >
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-4xl font-bold">Bootcamp Program</h2>
-          <p>Impacting students through education and outreach</p>
+          <p>Academic intensive programs for student excellence</p>
         </div>
       </section>
 

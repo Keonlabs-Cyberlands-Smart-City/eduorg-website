@@ -51,8 +51,8 @@ export default function Clubs() {
 
   const gallery = [
     "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Chess club image_e4319a63.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Chess club image_e4319a63.jpg",
+    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Chess club image_e4319a63.jpg",
   ];
 
   return (
@@ -69,7 +69,7 @@ export default function Clubs() {
       >
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-4xl font-bold">Clubs Program</h2>
-          <p>Fostering interests and building communities</p>
+          <p>ICT, literacy and social clubs for student growth</p>
         </div>
       </section>
 
