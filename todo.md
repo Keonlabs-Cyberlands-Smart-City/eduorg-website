@@ -75,3 +75,34 @@
 - Responsive design implemented
 - Admin dashboard with local state management
 - Unit tests created and passing
+
+
+## New Features - Firebase & Admin Integration
+
+### Image Replacement
+- [ ] Replace all remaining placeholder images with Zambian images
+- [ ] Ensure all updates gallery images use Zambian images
+- [ ] Update coordinator profile images
+
+### Firebase Integration
+- [x] Set up Firebase Firestore for posts collection
+- [x] Implement real-time post loading from Firestore
+- [x] Create posts with page/program association
+- [x] Delete posts from Firestore
+- [x] Sort posts by date (newest first)
+
+### Admin Panel Enhancements
+- [x] Add statistics update form for each program
+- [x] Store program statistics in Firestore
+- [x] Load statistics from Firestore on program pages
+- [x] Edit statistics from admin panel
+- [x] Display latest updates from Firestore on program pages
+
+### Program Page Sync
+- [x] Bootcamp page loads posts from Firestore
+- [x] Sports page loads posts from Firestore
+- [x] Clubs page loads posts from Firestore
+- [x] Library page loads posts from Firestore
+- [x] Day-in page loads posts from Firestore
+- [x] Outreach page loads posts from Firestore
+- [x] Real-time updates when admin creates posts

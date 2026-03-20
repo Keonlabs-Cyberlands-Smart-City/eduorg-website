@@ -1,19 +1,53 @@
+import { useState, useEffect } from "react";
+import { collection, query, where, orderBy, onSnapshot, doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function Bootcamp() {
-  const stats = [
-    { number: "12", label: "Bootcamps / Year" },
-    { number: "300+", label: "Students Reached" },
-    { number: "25+", label: "Schools Visited" },
-    { number: "50+", label: "Activities Conducted" },
-  ];
+  const [updates, setUpdates] = useState<any[]>([]);
+  const [stats, setStats] = useState({
+    bootcamps: "12",
+    students: "300+",
+    schools: "25+",
+    activities: "50+",
+  });
 
-  const updates = [
-    { title: "School Visit", desc: "Visited local school for training sessions.", img: "https://images.unsplash.com/photo-1509062522246-3755977927d7" },
-    { title: "Student Workshop", desc: "Interactive learning workshop conducted.", img: "https://images.unsplash.com/photo-1513258496099-48168024aec0" },
-    { title: "Group Activities", desc: "Students engaged in teamwork exercises.", img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644" },
-  ];
+  useEffect(() => {
+    loadUpdates();
+    loadStats();
+  }, []);
+
+  const loadUpdates = async () => {
+    try {
+      const q = query(
+        collection(db, "posts"),
+        where("page", "==", "bootcamp"),
+        orderBy("date", "desc")
+      );
+      onSnapshot(q, (snapshot) => {
+        const postsData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setUpdates(postsData);
+      });
+    } catch (error) {
+      console.error("Error loading updates:", error);
+    }
+  };
+
+  const loadStats = async () => {
+    try {
+      const docRef = doc(db, "statistics", "bootcamp");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setStats(docSnap.data() as any);
+      }
+    } catch (error) {
+      console.error("Error loading stats:", error);
+    }
+  };
 
   const gallery = [
     "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
@@ -26,7 +60,13 @@ export default function Bootcamp() {
       <Navbar />
 
       {/* HERO */}
-      <section className="h-[400px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg')" }}>
+      <section
+        className="h-[400px] bg-cover bg-center flex items-center justify-center text-white"
+        style={{
+          backgroundImage:
+            "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg')",
+        }}
+      >
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-4xl font-bold">Bootcamp Program</h2>
           <p>Impacting students through education and outreach</p>
@@ -34,45 +74,80 @@ export default function Bootcamp() {
       </section>
 
       {/* STATISTICS */}
-      <section id="overview" className="py-12 px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">Bootcamp Statistics</h2>
+      <section className="py-12 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">Our Impact</h2>
           <div className="grid md:grid-cols-4 gap-6">
-            {stats.map((stat, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                <h3 className="text-3xl font-bold text-blue-600">{stat.number}</h3>
-                <p>{stat.label}</p>
-              </div>
-            ))}
+            <div className="bg-blue-50 p-6 rounded-lg text-center">
+              <h3 className="text-4xl font-bold text-blue-600">{stats.bootcamps}</h3>
+              <p className="text-gray-600">Bootcamps / Year</p>
+            </div>
+            <div className="bg-blue-50 p-6 rounded-lg text-center">
+              <h3 className="text-4xl font-bold text-blue-600">{stats.students}</h3>
+              <p className="text-gray-600">Students Reached</p>
+            </div>
+            <div className="bg-blue-50 p-6 rounded-lg text-center">
+              <h3 className="text-4xl font-bold text-blue-600">{stats.schools}</h3>
+              <p className="text-gray-600">Schools Visited</p>
+            </div>
+            <div className="bg-blue-50 p-6 rounded-lg text-center">
+              <h3 className="text-4xl font-bold text-blue-600">{stats.activities}</h3>
+              <p className="text-gray-600">Activities Conducted</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* LATEST UPDATES */}
-      <section id="updates" className="bg-white py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6">Latest Updates</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {updates.map((update, idx) => (
-              <div key={idx} className="bg-gray-100 rounded-xl shadow hover:shadow-lg overflow-hidden transition">
-                <img src={update.img} alt={update.title} className="w-full h-40 object-cover" />
-                <div className="p-4">
-                  <h3 className="font-bold">{update.title}</h3>
-                  <p>{update.desc}</p>
+      <section className="py-12 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-8">Latest Updates</h2>
+          {updates.length === 0 ? (
+            <p className="text-gray-500">No updates yet</p>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-6">
+              {updates.map((update) => (
+                <div key={update.id} className="bg-white rounded-lg shadow hover:shadow-lg transition">
+                  {update.image && (
+                    <img
+                      src={update.image}
+                      alt={update.title}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  )}
+                  <div className="p-4">
+                    <h3 className="font-bold text-lg mb-2">{update.title}</h3>
+                    <p className="text-gray-600 text-sm mb-3 line-clamp-3">{update.content}</p>
+                    <p className="text-xs text-gray-500">Date: {update.date}</p>
+                    {update.tags && update.tags.length > 0 && (
+                      <div className="flex gap-2 mt-2 flex-wrap">
+                        {update.tags.map((tag: string, idx: number) => (
+                          <span key={idx} className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" className="py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 text-center">Bootcamp Gallery</h2>
+      <section className="py-12 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-8">Photo Gallery</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {gallery.map((img, idx) => (
-              <img key={idx} src={img} alt={`Gallery ${idx}`} className="rounded-xl w-full h-64 object-cover hover:shadow-lg transition" />
+              <img
+                key={idx}
+                src={img}
+                alt={`Gallery ${idx}`}
+                className="w-full h-64 object-cover rounded-lg hover:shadow-lg transition"
+              />
             ))}
           </div>
         </div>
