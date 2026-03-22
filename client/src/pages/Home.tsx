@@ -39,13 +39,16 @@ export default function Home() {
       {/* NAVBAR */}
       <header className="bg-white shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
-          <h1 className="text-2xl font-bold text-blue-600">EduOrg</h1>
+          <div className="flex items-center gap-3">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg" alt="Baraka Logo" className="h-10 w-10 object-contain" />
+            <h1 className="text-2xl font-bold" style={{color: '#95ba12'}}>Baraka learning center</h1>
+          </div>
           <nav className="space-x-6 hidden md:flex">
-            <a href="#" className="hover:text-blue-600 transition">Home</a>
-            <a href="#programs" className="hover:text-blue-600 transition">Programs</a>
-            <a href="#about" className="hover:text-blue-600 transition">About</a>
-            <a href="#contact" className="hover:text-blue-600 transition">Contact</a>
-            <Link href="/admin" className="hover:text-blue-600 transition">Admin</Link>
+            <a href="#" className="hover:text-blue-600 transition" style={{color: '#e07f10'}}>Home</a>
+            <a href="#programs" className="hover:text-blue-600 transition" style={{color: '#e07f10'}}>Programs</a>
+            <a href="#about" className="hover:text-blue-600 transition" style={{color: '#e07f10'}}>About</a>
+            <a href="#contact" className="hover:text-blue-600 transition" style={{color: '#e07f10'}}>Contact</a>
+            <Link href="/admin" className="hover:text-blue-600 transition" style={{color: '#8abc20'}}>Admin</Link>
           </nav>
         </div>
       </header>
@@ -53,7 +56,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="h-[500px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg')" }}>
         <div className="bg-black/60 p-8 rounded-xl text-center">
-          <h2 className="text-5xl font-bold mb-4">Empowering Education</h2>
+          <h2 className="text-5xl font-bold mb-4" style={{color: '#e57d06'}}>Make learning fun and engaging</h2>
           <p className="mb-4">Daily activities, bootcamps, clubs and more</p>
           <a href="#programs" className="bg-blue-600 px-6 py-2 rounded inline-block hover:bg-blue-700 transition">Explore Programs</a>
         </div>
@@ -62,13 +65,13 @@ export default function Home() {
       {/* PROGRAMS SECTION */}
       <section id="programs" className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Our Programs</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center" style={{color: '#c2e708'}}>Our Programs</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {programs.map((prog, idx) => (
               <Link key={idx} href={prog.link} className="bg-white rounded-2xl shadow hover:shadow-lg overflow-hidden transition">
                 <img src={prog.img} alt={prog.name} className="w-full h-40 object-cover" />
                 <div className="p-4">
-                  <h3 className="text-xl font-bold">{prog.name}</h3>
+                  <h3 className="text-xl font-bold" style={{color: '#e58a0b'}}>{prog.name}</h3>
                   <p className="text-gray-600">{prog.desc}</p>
                 </div>
               </Link>
@@ -93,7 +96,7 @@ export default function Home() {
             <input type="text" placeholder="Your Name" className="p-3 border rounded" required />
             <input type="email" placeholder="Your Email" className="p-3 border rounded" required />
             <textarea placeholder="Message" className="p-3 border rounded" rows={5} required></textarea>
-            <button type="submit" className="bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition">Send Message</button>
+            <button type="submit" className="bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition" style={{backgroundColor: '#8abc20'}}>Send Message</button>
           </form>
         </div>
       </section>
@@ -101,7 +104,7 @@ export default function Home() {
       {/* TEAM SECTION */}
       <section className="bg-white py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center">Our Team</h2>
+          <h2 className="text-3xl font-bold mb-10 text-center" style={{color: '#dbea06', fontWeight: '900', backgroundColor: '#e07f10'}}>Our Team</h2>
 
           <h3 className="text-2xl font-semibold mb-4">Teachers</h3>
           <div className="grid md:grid-cols-3 gap-6 mb-10">
@@ -117,7 +120,7 @@ export default function Home() {
           <h3 className="text-2xl font-semibold mb-4">Management</h3>
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             {managers.map((manager, idx) => (
-              <div key={idx} className="bg-gray-100 p-6 rounded-2xl text-center shadow hover:shadow-lg transition">
+              <div key={idx} className="bg-gray-100 p-6 rounded-2xl text-center shadow hover:shadow-lg transition" style={{backgroundColor: '#f3f4f6'}}>
                 <img src={manager.img} alt={manager.name} className="w-24 h-24 rounded-full mx-auto mb-4 object-cover" />
                 <h4 className="font-bold">{manager.name}</h4>
                 <p className="text-sm text-gray-500">{manager.role}</p>
@@ -139,7 +142,7 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-blue-700 text-white pt-10 pb-6">
+      <footer className="bg-blue-700 text-white pt-10 pb-6" style={{backgroundColor: '#738e10'}}>
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 px-6">
           <div>
             <h3 className="font-bold text-lg mb-3">EduOrg</h3>

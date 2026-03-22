@@ -120,3 +120,20 @@
 - [x] Ensure all gallery images match program theme
 - [x] Update Home page program cards with correct images
 - [x] Update team member profile images appropriately
+
+
+## Outreach Program Image Update
+- [ ] Replace Outreach hero image with appropriate image
+- [ ] Update Outreach gallery images with corresponding images
+- [ ] Ensure Outreach page displays unique images distinct from other programs
+
+
+## Branding Update
+- [x] Upload logo from shared folder to CDN
+- [x] Update website name from "EduOrg" to "Baraka learning center" across all pages
+- [x] Update text colors to match home page styling (orange #e07f10, green #95ba12, etc.)
+- [x] Update Navbar styling on all program pages
+- [x] Update Footer styling on all pages
+- [x] Update button colors and links to match branding
+- [x] Add logo to Navbar on all pages
+- [x] Update Admin page styling to match branding

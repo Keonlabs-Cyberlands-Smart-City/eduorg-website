@@ -4,6 +4,8 @@ import { db } from "@/lib/firebase";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg";
+
 export default function Library() {
   const [updates, setUpdates] = useState<any[]>([]);
   const [stats, setStats] = useState({
