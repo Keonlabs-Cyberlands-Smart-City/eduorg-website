@@ -154,3 +154,12 @@
 - [x] Remove Admin link from main navigation
 - [x] Test admin route is accessible at /admin
 - [x] Verify main pages work without admin access
+
+
+## Logo and Text Sizing Updates
+- [x] Increase logo size in Navbar (h-10 w-10 → h-16 w-16)
+- [x] Reduce website name text size in Navbar (text-2xl → text-lg)
+- [x] Update Home page navbar logo size and text
+- [x] Add logo to Footer component
+- [x] Verify all pages display updated logo and text
+- [x] All tests passing
