@@ -51,11 +51,7 @@ export default function Bootcamp() {
     }
   };
 
-  const gallery = [
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg",
-  ];
+
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 font-sans">
@@ -135,23 +131,6 @@ export default function Bootcamp() {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* GALLERY */}
-      <section className="py-12 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8">Photo Gallery</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            {gallery.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt={`Gallery ${idx}`}
-                className="w-full h-64 object-cover rounded-lg hover:shadow-lg transition"
-              />
-            ))}
-          </div>
         </div>
       </section>
 

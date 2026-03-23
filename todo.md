@@ -137,3 +137,12 @@
 - [x] Update button colors and links to match branding
 - [x] Add logo to Navbar on all pages
 - [x] Update Admin page styling to match branding
+
+
+## Photo Gallery Reorganization
+- [x] Remove gallery sections from all program pages
+- [x] Add "Photo Gallery" tab to admin dashboard
+- [x] Create unified photo gallery interface with program filtering
+- [x] Display photos with title, caption, and date posted
+- [x] Filter gallery by program (Bootcamp, Sports, Clubs, Library, Day-in, Outreach)
+- [x] Test gallery filtering and display on all programs

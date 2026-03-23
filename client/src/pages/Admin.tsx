@@ -27,6 +27,7 @@ export default function Admin() {
   const [outreachStats, setOutreachStats] = useState({ programs: "6", members: "1000+", communities: "50+", volunteers: "150+" });
 
   const [activeTab, setActiveTab] = useState("posts");
+  const [galleryFilterProgram, setGalleryFilterProgram] = useState("all");
 
   useEffect(() => {
     loadPosts();
@@ -187,6 +188,12 @@ export default function Admin() {
             Manage Posts
           </button>
           <button
+            onClick={() => setActiveTab("gallery")}
+            className={`px-4 py-2 font-semibold ${activeTab === "gallery" ? "border-b-2 border-blue-600 text-blue-600" : "text-gray-600"}`}
+          >
+            Photo Gallery
+          </button>
+          <button
             onClick={() => setActiveTab("stats")}
             className={`px-4 py-2 font-semibold ${activeTab === "stats" ? "border-b-2 border-blue-600 text-blue-600" : "text-gray-600"}`}
           >
@@ -305,6 +312,57 @@ export default function Admin() {
                 )}
               </div>
             </div>
+          </div>
+        )}
+
+        {/* PHOTO GALLERY TAB */}
+        {activeTab === "gallery" && (
+          <div className="bg-white p-6 rounded-xl shadow">
+            <h2 className="font-bold mb-4 text-2xl">Photo Gallery</h2>
+            
+            <div className="mb-6">
+              <label className="block text-sm font-semibold mb-2">Filter by Program</label>
+              <select
+                value={galleryFilterProgram}
+                onChange={(e) => setGalleryFilterProgram(e.target.value)}
+                className="w-full p-2 border rounded"
+              >
+                <option value="all">All Programs</option>
+                <option value="bootcamp">Bootcamp</option>
+                <option value="sports">Sports</option>
+                <option value="clubs">Clubs</option>
+                <option value="library">Library</option>
+                <option value="dayin">Day-in</option>
+                <option value="outreach">Outreach</option>
+              </select>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {posts
+                .filter((post) => galleryFilterProgram === "all" || post.page === galleryFilterProgram)
+                .filter((post) => post.image)
+                .map((post) => (
+                  <div key={post.id} className="bg-gray-50 rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="p-4">
+                      <h3 className="font-bold text-lg mb-2">{post.title}</h3>
+                      <p className="text-sm text-gray-600 mb-3 line-clamp-3">{post.content}</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-500">📅 {post.date}</span>
+                        <span className="text-xs font-semibold" style={{color: '#95ba12'}}>Program: {post.page}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+            
+            {posts.filter((post) => galleryFilterProgram === "all" || post.page === galleryFilterProgram).filter((post) => post.image).length === 0 && (
+              <p className="text-gray-500 text-center py-8">No photos available for this program</p>
+            )}
           </div>
         )}
 
