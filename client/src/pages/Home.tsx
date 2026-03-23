@@ -48,7 +48,6 @@ export default function Home() {
             <a href="#programs" className="hover:text-blue-600 transition" style={{color: '#e07f10'}}>Programs</a>
             <a href="#about" className="hover:text-blue-600 transition" style={{color: '#e07f10'}}>About</a>
             <a href="#contact" className="hover:text-blue-600 transition" style={{color: '#e07f10'}}>Contact</a>
-            <Link href="/admin" className="hover:text-blue-600 transition" style={{color: '#8abc20'}}>Admin</Link>
           </nav>
         </div>
       </header>
