@@ -146,3 +146,11 @@
 - [x] Display photos with title, caption, and date posted
 - [x] Filter gallery by program (Bootcamp, Sports, Clubs, Library, Day-in, Outreach)
 - [x] Test gallery filtering and display on all programs
+
+
+## Admin Route Separation
+- [x] Create dedicated /admin route
+- [x] Move Admin.tsx to separate route
+- [x] Remove Admin link from main navigation
+- [x] Test admin route is accessible at /admin
+- [x] Verify main pages work without admin access

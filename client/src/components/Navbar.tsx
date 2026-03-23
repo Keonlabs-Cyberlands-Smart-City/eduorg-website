@@ -13,7 +13,6 @@ export default function Navbar() {
           <a href="/#programs" className="transition" style={{color: '#e07f10'}}>Programs</a>
           <a href="/#about" className="transition" style={{color: '#e07f10'}}>About</a>
           <a href="/#contact" className="transition" style={{color: '#e07f10'}}>Contact</a>
-          <Link href="/admin" className="transition" style={{color: '#8abc20'}}>Admin</Link>
         </nav>
       </div>
     </header>
