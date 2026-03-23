@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import Navbar from "@/components/Navbar";
@@ -7,6 +8,34 @@ import Footer from "@/components/Footer";
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg";
 
 export default function Admin() {
+  const [, setLocation] = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("adminAuth");
+    if (auth === "true") {
+      setIsAuthenticated(true);
+    } else {
+      setLocation("/admin-login");
+    }
+    setAuthChecked(true);
+  }, [setLocation]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminAuth");
+    localStorage.removeItem("adminLoginTime");
+    setLocation("/admin-login");
+  };
+
+  if (!authChecked) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
   const [page, setPage] = useState("dayin");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -179,6 +208,15 @@ export default function Admin() {
       <Navbar />
 
       <div className="max-w-7xl mx-auto p-6 flex-1 w-full">
+        {/* Logout button */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+          >
+            Logout
+          </button>
+        </div>
         {/* Tabs */}
         <div className="flex gap-4 mb-6 border-b">
           <button

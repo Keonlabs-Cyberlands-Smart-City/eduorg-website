@@ -163,3 +163,15 @@
 - [x] Add logo to Footer component
 - [x] Verify all pages display updated logo and text
 - [x] All tests passing
+
+
+## Admin Login Page
+- [x] Create AdminLogin.tsx component
+- [x] Add login form with username and password fields
+- [x] Implement authentication logic (username: admin, password: Keonlabs2024)
+- [x] Add background image to login page
+- [x] Redirect to admin dashboard on successful login
+- [x] Store login state in localStorage
+- [x] Redirect to login if accessing /admin without authentication
+- [x] Add logout functionality
+- [x] Test login flow
