@@ -7,7 +7,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2 mb-3">
             <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg" alt="Baraka Logo" className="h-12 w-12 object-contain" />
-            <h3 className="font-bold text-lg" style={{color: '#95ba12'}}>Baraka learning center</h3>
+            <h3 className="font-bold text-lg" style={{color: '#95ba12'}}>Kapiri mposhi Baraka learning center</h3>
           </div>
           <p className="text-sm text-gray-300">Empowering communities through education, training, and outreach programs.</p>
         </div>
@@ -37,7 +37,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="text-center mt-8 text-sm text-gray-400">
-        &copy; 2026 Baraka learning center. All rights reserved.
+        &copy; 2026 Kapiri mposhi Baraka learning center. All rights reserved.
       </div>
     </footer>
   );
