@@ -5,9 +5,9 @@ export default function Footer() {
     <footer className="pt-10 pb-6" style={{backgroundColor: '#2d3e2d'}}>
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 px-6">
         <div>
-          <div className="flex items-center gap-2 mb-3">
-            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg" alt="Baraka Logo" className="h-12 w-12 object-contain" />
-            <h3 className="font-bold text-lg" style={{color: '#95ba12'}}>Kapiri mposhi Baraka learning center</h3>
+          <div className="flex flex-col items-center mb-3">
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg" alt="Baraka Logo" className="h-12 w-12 object-contain mb-2" />
+            <h3 className="font-bold text-sm text-center" style={{color: '#95ba12'}}>Kapiri mposhi Baraka learning center</h3>
           </div>
           <p className="text-sm text-gray-300">Empowering communities through education, training, and outreach programs.</p>
         </div>
