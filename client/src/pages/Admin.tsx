@@ -38,6 +38,11 @@ export default function Admin() {
   // UI state
   const [activeTab, setActiveTab] = useState("posts");
   const [galleryFilterProgram, setGalleryFilterProgram] = useState("all");
+  
+  // Messages state
+  const [messages, setMessages] = useState<any[]>([]);
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
+  const [replyText, setReplyText] = useState("");
 
   // ===== EFFECTS =====
   useEffect(() => {
@@ -49,6 +54,14 @@ export default function Admin() {
     }
     setAuthChecked(true);
   }, [setLocation]);
+  // Load messages from Firebase
+  useEffect(() => {
+    const unsubscribe = onSnapshot(query(collection(db, "messages"), orderBy("createdAt", "desc")), (snapshot) => {
+      const msgs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setMessages(msgs);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -260,6 +273,13 @@ export default function Admin() {
           >
             Update Statistics
           </button>
+          <button
+            onClick={() => setActiveTab("messages")}
+            className={`px-4 py-2 font-semibold ${activeTab === "messages" ? "border-b-2" : ""}`}
+            style={{ borderColor: activeTab === "messages" ? "#8abc20" : "transparent", color: activeTab === "messages" ? "#8abc20" : "#666" }}
+          >
+            Messages
+          </button>
         </div>
 
         {/* POSTS TAB */}
@@ -380,6 +400,73 @@ export default function Admin() {
             <button onClick={handleSaveStats} className="w-full mt-6 p-2 rounded text-white font-semibold" style={{ backgroundColor: "#8abc20" }}>
               Save Statistics
             </button>
+          </div>
+        )}
+
+        {/* MESSAGES TAB */}
+        {activeTab === "messages" && (
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h2 className="text-2xl font-bold mb-4" style={{ color: "#8abc20" }}>
+              Contact Form Messages
+            </h2>
+            {messages.length === 0 ? (
+              <p className="text-gray-600">No messages yet</p>
+            ) : (
+              <div className="space-y-4">
+                {messages.map((msg: any) => (
+                  <div key={msg.id} className="border rounded-lg p-4 bg-gray-50">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h3 className="font-bold text-lg">{msg.name}</h3>
+                        <p className="text-sm text-gray-600">{msg.email}</p>
+                        <p className="text-xs text-gray-500 mt-1">{new Date(msg.createdAt?.toDate?.() || msg.createdAt).toLocaleString()}</p>
+                      </div>
+                      <span className={`px-3 py-1 rounded text-sm font-semibold ${msg.replied ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"}`}>
+                        {msg.replied ? "Replied" : "New"}
+                      </span>
+                    </div>
+                    <p className="text-gray-800 mb-3 p-2 bg-white rounded border-l-4" style={{ borderColor: "#8abc20" }}>{msg.message}</p>
+                    
+                    {replyingTo === msg.id ? (
+                      <div className="bg-blue-50 p-3 rounded border border-blue-200">
+                        <textarea
+                          value={replyText}
+                          onChange={(e) => setReplyText(e.target.value)}
+                          placeholder="Type your reply..."
+                          className="w-full p-2 border rounded mb-2"
+                          rows={3}
+                        />
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              alert(`Reply sent to ${msg.email}: ${replyText}`);
+                              setReplyingTo(null);
+                              setReplyText("");
+                            }}
+                            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                          >
+                            Send Reply
+                          </button>
+                          <button
+                            onClick={() => setReplyingTo(null)}
+                            className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => setReplyingTo(msg.id)}
+                        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+                      >
+                        Reply
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

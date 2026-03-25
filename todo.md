@@ -175,3 +175,13 @@
 - [x] Redirect to login if accessing /admin without authentication
 - [x] Add logout functionality
 - [x] Test login flow
+
+
+## Contact Form Messaging System
+- [x] Create Messages collection in Firebase Firestore
+- [x] Update Home.tsx contact form to save messages to Firestore
+- [x] Add "Messages" tab to admin dashboard
+- [x] Display all contact form submissions in admin panel
+- [x] Add reply functionality to send emails to users
+- [x] Show message status (new, replied, archived)
+- [x] Test message submission and admin response flow
