@@ -47,10 +47,6 @@ export default function AdminLogin() {
           <p className="text-center text-lg font-semibold" style={{ color: "#95ba12" }}>Kapiri mposhi Baraka learning center</p>
         </div>
 
-        <h1 className="text-3xl font-bold text-center mb-6" style={{ color: "#2d3e2d" }}>
-          Admin Login
-        </h1>
-
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Username */}
           <div>
