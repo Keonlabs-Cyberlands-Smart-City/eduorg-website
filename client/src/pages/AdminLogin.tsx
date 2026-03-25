@@ -41,15 +41,15 @@ export default function AdminLogin() {
 
       {/* Login form */}
       <div className="relative z-10 bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
-        {/* Logo */}
-        <div className="flex justify-center mb-6">
-          <img src={LOGO_URL} alt="Baraka Logo" className="h-20 w-20 object-contain" />
+        {/* Logo and Title */}
+        <div className="flex flex-col items-center mb-8">
+          <img src={LOGO_URL} alt="Baraka Logo" className="h-32 w-32 object-contain mb-4" />
+          <p className="text-center text-lg font-semibold" style={{ color: "#95ba12" }}>Kapiri mposhi Baraka learning center</p>
         </div>
 
-        <h1 className="text-3xl font-bold text-center mb-2" style={{ color: "#95ba12" }}>
+        <h1 className="text-3xl font-bold text-center mb-6" style={{ color: "#2d3e2d" }}>
           Admin Login
         </h1>
-        <p className="text-center text-gray-600 mb-6">Baraka learning center</p>
 
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Username */}
