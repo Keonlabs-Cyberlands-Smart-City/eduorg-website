@@ -40,7 +40,7 @@ export default function Home() {
       <header className="bg-white shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
           <div className="flex flex-col items-center">
-            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg" alt="Baraka Logo" className="h-20 w-20 object-contain" />
+            <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg" alt="Baraka Logo" className="h-56 w-56 object-contain" />
             <h1 className="text-sm font-bold text-center" style={{color: '#95ba12'}}>Kapiri mposhi Baraka learning center</h1>
           </div>
           <nav className="space-x-6 hidden md:flex">
