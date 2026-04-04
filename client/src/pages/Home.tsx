@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { trpc } from "@/lib/trpc";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
@@ -46,11 +47,14 @@ export default function Home() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
+  const sendEmailMutation = trpc.email.sendContactForm.useMutation();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
     try {
+      // Save to Firebase
       await addDoc(collection(db, "messages"), {
         name,
         email,
@@ -59,11 +63,23 @@ export default function Home() {
         status: "new",
         replied: false
       });
-      setSuccess(true);
-      setName("");
-      setEmail("");
-      setMessage("");
-      setTimeout(() => setSuccess(false), 3000);
+
+      // Send emails via tRPC
+      const result = await sendEmailMutation.mutateAsync({
+        name,
+        email,
+        message,
+      });
+
+      if (result.success) {
+        setSuccess(true);
+        setName("");
+        setEmail("");
+        setMessage("");
+        setTimeout(() => setSuccess(false), 5000);
+      } else {
+        setError(result.message || "Failed to send message. Please try again.");
+      }
     } catch (err) {
       console.error("Error sending message:", err);
       setError("Failed to send message. Please try again.");
@@ -116,7 +132,11 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-6 text-center">Contact Us</h2>
           <form className="grid gap-4 bg-white p-6 rounded-lg shadow" onSubmit={handleSubmit}>
-            {success && <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">Message sent successfully! We will respond soon.</div>}
+            {success && (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+                <strong>Message sent successfully!</strong> A confirmation email has been sent to {email}. We will respond soon.
+              </div>
+            )}
             {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">{error}</div>}
             <input type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} className="p-3 border rounded" required />
             <input type="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} className="p-3 border rounded" required />
