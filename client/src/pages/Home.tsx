@@ -4,6 +4,7 @@ import { db } from "@/lib/firebase";
 import { trpc } from "@/lib/trpc";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FacebookFeed from "@/components/FacebookFeed";
 import { Link } from "wouter";
 
 const programs = [
@@ -143,6 +144,15 @@ export default function Home() {
             <textarea placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} className="p-3 border rounded" rows={5} required></textarea>
             <button type="submit" disabled={loading} className="text-white p-3 rounded hover:opacity-90 transition disabled:opacity-50" style={{backgroundColor: '#8abc20'}}>{loading ? "Sending..." : "Send Message"}</button>
           </form>
+        </div>
+      </section>
+
+      {/* FACEBOOK FEED SECTION */}
+      <section className="py-12 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold mb-8 text-center" style={{color: '#c2e708'}}>Follow Us on Facebook</h2>
+          <p className="text-center text-gray-600 mb-8">Stay updated with our latest activities, events, and achievements</p>
+          <FacebookFeed />
         </div>
       </section>
 

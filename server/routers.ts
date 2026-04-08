@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { sendContactFormEmail, sendConfirmationEmail } from "./email";
+import { getFormattedFacebookPosts } from "./facebook";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -48,6 +49,33 @@ export const appRouter = router({
           return {
             success: false,
             message: "Failed to send message. Please try again.",
+          };
+        }
+      }),
+  }),
+
+  social: router({
+    getFacebookPosts: publicProcedure
+      .input(
+        z.object({
+          limit: z.number().min(1).max(50).default(10),
+        }).optional()
+      )
+      .query(async ({ input }) => {
+        try {
+          const limit = input?.limit || 10;
+          const posts = await getFormattedFacebookPosts(limit);
+          return {
+            success: true,
+            posts,
+            message: posts.length > 0 ? "Posts fetched successfully" : "No Facebook credentials configured",
+          };
+        } catch (error) {
+          console.error("Error fetching Facebook posts:", error);
+          return {
+            success: false,
+            posts: [],
+            message: "Failed to fetch Facebook posts",
           };
         }
       }),
