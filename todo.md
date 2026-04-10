@@ -236,3 +236,15 @@
 - [x] Implement media storage (images, videos, audio)
 - [x] Write and run tests
 - [ ] Verify stories display on live site
+
+
+## Stories Gallery Feature (Public Display)
+- [x] Create stories gallery component with grid layout
+- [x] Add category filter buttons
+- [x] Implement search functionality
+- [x] Build story card component with preview
+- [x] Create story detail modal/page
+- [x] Add view count tracking
+- [ ] Implement pagination or infinite scroll
+- [x] Write and run tests
+- [ ] Verify gallery displays on live site

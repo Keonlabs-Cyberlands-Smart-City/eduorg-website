@@ -12,6 +12,7 @@ import Library from "./pages/Library";
 import DayIn from "./pages/DayIn";
 import Outreach from "./pages/Outreach";
 import Stories from "./pages/Stories";
+import StoriesGalleryPage from "./pages/StoriesGallery";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 
@@ -26,6 +27,7 @@ function Router() {
       <Route path={"/dayin"} component={DayIn} />
       <Route path={"/outreach"} component={Outreach} />
       <Route path={"/stories"} component={Stories} />
+      <Route path={"/stories-gallery"} component={StoriesGalleryPage} />
       <Route path={"/admin-login"} component={AdminLogin} />
       <Route path={"/admin"} component={Admin} />
       <Route path={"/404"} component={NotFound} />

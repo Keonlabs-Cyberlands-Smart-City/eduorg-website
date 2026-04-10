@@ -11,7 +11,7 @@ export default function Navbar() {
         <nav className="space-x-6 hidden md:flex">
           <Link href="/" className="transition" style={{color: '#e07f10'}}>Home</Link>
           <a href="/#programs" className="transition" style={{color: '#e07f10'}}>Programs</a>
-          <Link href="/stories" className="transition" style={{color: '#e07f10'}}>Stories</Link>
+          <Link href="/stories-gallery" className="transition" style={{color: '#e07f10'}}>Stories</Link>
           <a href="/#about" className="transition" style={{color: '#e07f10'}}>About</a>
           <a href="/#contact" className="transition" style={{color: '#e07f10'}}>Contact</a>
         </nav>
