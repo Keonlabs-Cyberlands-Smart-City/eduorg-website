@@ -15,6 +15,13 @@
       "when": 1775852788823,
       "tag": "0001_tricky_sleepwalker",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1775855608524,
+      "tag": "0002_nosy_nightcrawler",
+      "breakpoints": true
     }
   ]
 }

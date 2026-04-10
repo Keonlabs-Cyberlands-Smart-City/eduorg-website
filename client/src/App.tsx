@@ -11,6 +11,7 @@ import Clubs from "./pages/Clubs";
 import Library from "./pages/Library";
 import DayIn from "./pages/DayIn";
 import Outreach from "./pages/Outreach";
+import Stories from "./pages/Stories";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 
@@ -24,6 +25,7 @@ function Router() {
       <Route path={"/library"} component={Library} />
       <Route path={"/dayin"} component={DayIn} />
       <Route path={"/outreach"} component={Outreach} />
+      <Route path={"/stories"} component={Stories} />
       <Route path={"/admin-login"} component={AdminLogin} />
       <Route path={"/admin"} component={Admin} />
       <Route path={"/404"} component={NotFound} />

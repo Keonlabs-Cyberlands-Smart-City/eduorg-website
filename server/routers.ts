@@ -13,6 +13,14 @@ import {
   deleteTestimonial,
   getTestimonialById 
 } from "./db.testimonials";
+import {
+  getAllApprovedStories,
+  getStoriesByCategory,
+  createStory,
+  updateStory,
+  deleteStory,
+  getPendingStories,
+} from "./db.stories";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -239,6 +247,189 @@ export const appRouter = router({
           return {
             success: false,
             message: "Failed to delete testimonial",
+          };
+        }
+      }),
+  }),
+
+  stories: router({
+    // Get all approved stories
+    getAll: publicProcedure.query(async () => {
+      try {
+        const allStories = await getAllApprovedStories();
+        return {
+          success: true,
+          stories: allStories,
+        };
+      } catch (error) {
+        console.error("Error fetching stories:", error);
+        return {
+          success: false,
+          stories: [],
+        };
+      }
+    }),
+
+    // Get stories by category
+    getByCategory: publicProcedure
+      .input(z.object({ category: z.string() }))
+      .query(async ({ input }) => {
+        try {
+          const categoryStories = await getStoriesByCategory(input.category);
+          return {
+            success: true,
+            stories: categoryStories,
+          };
+        } catch (error) {
+          console.error("Error fetching stories by category:", error);
+          return {
+            success: false,
+            stories: [],
+          };
+        }
+      }),
+
+    // Submit new story (with admin key validation)
+    submit: publicProcedure
+      .input(
+        z.object({
+          adminKey: z.string(),
+          category: z.enum(["teacher", "student", "headteacher", "parent", "staff", "other"]),
+          authorName: z.string().min(1),
+          school: z.string().min(1),
+          title: z.string().min(1),
+          content: z.string().min(1),
+          imageUrl: z.string().optional(),
+          videoUrl: z.string().optional(),
+          audioUrl: z.string().optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        // Validate admin key
+        if (input.adminKey !== "Keonlabs2026") {
+          return {
+            success: false,
+            message: "Invalid admin key",
+          };
+        }
+
+        try {
+          const { adminKey, ...storyData } = input;
+          const story = await createStory({
+            ...storyData,
+            status: "pending",
+          });
+          return {
+            success: true,
+            story,
+            message: "Story submitted successfully. It will be reviewed by admins.",
+          };
+        } catch (error) {
+          console.error("Error submitting story:", error);
+          return {
+            success: false,
+            message: "Failed to submit story",
+          };
+        }
+      }),
+
+    // Approve story (admin)
+    approve: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          return {
+            success: false,
+            message: "Unauthorized",
+          };
+        }
+        try {
+          const story = await updateStory(input.id, { status: "approved" });
+          return {
+            success: true,
+            story,
+            message: "Story approved successfully",
+          };
+        } catch (error) {
+          console.error("Error approving story:", error);
+          return {
+            success: false,
+            message: "Failed to approve story",
+          };
+        }
+      }),
+
+    // Reject story (admin)
+    reject: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          return {
+            success: false,
+            message: "Unauthorized",
+          };
+        }
+        try {
+          const story = await updateStory(input.id, { status: "rejected" });
+          return {
+            success: true,
+            story,
+            message: "Story rejected successfully",
+          };
+        } catch (error) {
+          console.error("Error rejecting story:", error);
+          return {
+            success: false,
+            message: "Failed to reject story",
+          };
+        }
+      }),
+
+    // Get pending stories (admin)
+    getPending: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user?.role !== "admin") {
+        return {
+          success: false,
+          stories: [],
+          message: "Unauthorized",
+        };
+      }
+      try {
+        const pending = await getPendingStories();
+        return {
+          success: true,
+          stories: pending,
+        };
+      } catch (error) {
+        console.error("Error fetching pending stories:", error);
+        return {
+          success: false,
+          stories: [],
+        };
+      }
+    }),
+
+    // Delete story (admin)
+    delete: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          return {
+            success: false,
+            message: "Unauthorized",
+          };
+        }
+        try {
+          const deleted = await deleteStory(input.id);
+          return {
+            success: deleted,
+            message: deleted ? "Story deleted successfully" : "Failed to delete story",
+          };
+        } catch (error) {
+          console.error("Error deleting story:", error);
+          return {
+            success: false,
+            message: "Failed to delete story",
           };
         }
       }),

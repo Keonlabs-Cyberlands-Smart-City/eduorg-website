@@ -46,3 +46,26 @@ export const testimonials = mysqlTable("testimonials", {
 
 export type Testimonial = typeof testimonials.$inferSelect;
 export type InsertTestimonial = typeof testimonials.$inferInsert;
+
+/**
+ * User stories table for community submissions
+ */
+export const stories = mysqlTable("stories", {
+  id: int("id").autoincrement().primaryKey(),
+  category: mysqlEnum("category", ["teacher", "student", "headteacher", "parent", "staff", "other"]).notNull(),
+  authorName: varchar("authorName", { length: 255 }).notNull(),
+  school: varchar("school", { length: 255 }).notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  content: text("content").notNull(),
+  imageUrl: varchar("imageUrl", { length: 512 }),
+  videoUrl: varchar("videoUrl", { length: 512 }),
+  audioUrl: varchar("audioUrl", { length: 512 }),
+  status: mysqlEnum("status", ["pending", "approved", "rejected"]).default("pending"),
+  featured: mysqlEnum("featured", ["yes", "no"]).default("no"),
+  views: int("views").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Story = typeof stories.$inferSelect;
+export type InsertStory = typeof stories.$inferInsert;

@@ -224,3 +224,15 @@
 - [ ] Add image upload for student photos
 - [x] Write and run tests
 - [ ] Verify testimonials display on live site
+
+
+## Stories Feature (User Submissions)
+- [x] Create stories database schema with categories
+- [x] Add admin key validation system
+- [x] Create stories submission form with media upload
+- [ ] Build stories display page with filtering
+- [x] Add Stories navigation button to navbar
+- [ ] Create admin panel for managing stories
+- [x] Implement media storage (images, videos, audio)
+- [x] Write and run tests
+- [ ] Verify stories display on live site
