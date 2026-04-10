@@ -25,4 +25,24 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// TODO: Add your tables here
+/**
+ * Student testimonials table for storing success stories
+ */
+export const testimonials = mysqlTable("testimonials", {
+  id: int("id").autoincrement().primaryKey(),
+  studentName: varchar("studentName", { length: 255 }).notNull(),
+  studentRole: varchar("studentRole", { length: 255 }).notNull(),
+  quote: text("quote").notNull(),
+  story: text("story"),
+  photoUrl: varchar("photoUrl", { length: 512 }),
+  program: varchar("program", { length: 255 }),
+  impact: text("impact"),
+  rating: int("rating").default(5),
+  featured: mysqlEnum("featured", ["yes", "no"]).default("no"),
+  status: mysqlEnum("status", ["active", "inactive"]).default("active"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Testimonial = typeof testimonials.$inferSelect;
+export type InsertTestimonial = typeof testimonials.$inferInsert;

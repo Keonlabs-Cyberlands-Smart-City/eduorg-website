@@ -5,6 +5,7 @@ import { trpc } from "@/lib/trpc";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FacebookFeed from "@/components/FacebookFeed";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import { Link } from "wouter";
 
 const programs = [
@@ -153,6 +154,15 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-8 text-center" style={{color: '#c2e708'}}>Follow Us on Facebook</h2>
           <p className="text-center text-gray-600 mb-8">Stay updated with our latest activities, events, and achievements</p>
           <FacebookFeed />
+        </div>
+      </section>
+
+      {/* TESTIMONIALS SECTION */}
+      <section className="py-12 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4 text-center" style={{color: '#c2e708'}}>Student Success Stories</h2>
+          <p className="text-center text-gray-600 mb-12">Hear from our students about their transformative experiences and achievements</p>
+          <TestimonialsSection />
         </div>
       </section>
 

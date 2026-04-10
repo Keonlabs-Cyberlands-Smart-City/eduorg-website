@@ -213,3 +213,14 @@
 - [ ] Add admin settings for Facebook configuration
 - [x] Test Facebook feed display
 - [ ] Verify real-time post updates - Will work once credentials are provided
+
+
+## Student Testimonials Feature
+- [x] Create database schema for testimonials
+- [x] Add tRPC endpoints for testimonials (create, read, update, delete)
+- [x] Create testimonials component with carousel/grid display
+- [x] Add testimonials section to home page
+- [ ] Create admin panel for managing testimonials
+- [ ] Add image upload for student photos
+- [x] Write and run tests
+- [ ] Verify testimonials display on live site
