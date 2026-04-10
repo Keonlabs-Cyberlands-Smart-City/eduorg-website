@@ -4,6 +4,7 @@ import { collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, getDocs
 import { db } from "@/lib/firebase";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AdminModerationDashboard from "@/components/AdminModerationDashboard";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg";
 
@@ -280,6 +281,13 @@ export default function Admin() {
           >
             Messages
           </button>
+          <button
+            onClick={() => setActiveTab("moderation")}
+            className={`px-4 py-2 font-semibold ${activeTab === "moderation" ? "border-b-2" : ""}`}
+            style={{ borderColor: activeTab === "moderation" ? "#8abc20" : "transparent", color: activeTab === "moderation" ? "#8abc20" : "#666" }}
+          >
+            Story Moderation
+          </button>
         </div>
 
         {/* POSTS TAB */}
@@ -467,6 +475,16 @@ export default function Admin() {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {/* MODERATION TAB */}
+        {activeTab === "moderation" && (
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h2 className="text-2xl font-bold mb-6" style={{ color: "#8abc20" }}>
+              Story Moderation Dashboard
+            </h2>
+            <AdminModerationDashboard />
           </div>
         )}
       </div>

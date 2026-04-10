@@ -248,3 +248,16 @@
 - [ ] Implement pagination or infinite scroll
 - [x] Write and run tests
 - [ ] Verify gallery displays on live site
+
+
+## Admin Moderation Dashboard Feature
+- [x] Update Stories submission form with file upload from device
+- [x] Create admin moderation dashboard component
+- [x] Add pending stories list with status indicators
+- [x] Build approve/reject buttons with confirmation
+- [ ] Implement file upload to S3 storage
+- [x] Add bulk actions (approve all, reject all, delete)
+- [x] Create story detail view for admins
+- [x] Add filtering by category and status
+- [x] Write and run tests
+- [ ] Verify dashboard functionality on live site
