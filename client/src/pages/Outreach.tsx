@@ -3,6 +3,7 @@ import { collection, query, where, orderBy, onSnapshot, doc, getDoc } from "fire
 import { db } from "@/lib/firebase";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg";
 
@@ -87,16 +88,22 @@ export default function Outreach() {
               { label: "Communities Served", value: stats.communities, color: "#e57d06" },
               { label: "Volunteers Engaged", value: stats.volunteers, color: "#95ba12" },
             ].map((stat, idx) => (
-              <div
+              <ScrollReveal
                 key={idx}
-                className="stagger-item bg-white p-8 rounded-2xl shadow-lg hover-lift border-t-4 transition-all duration-300"
-                style={{ borderColor: stat.color }}
+                animation="fade-up"
+                delay={idx * 100}
+                duration={600}
               >
-                <h3 className="text-5xl font-bold mb-3" style={{ color: stat.color }}>
-                  {stat.value}
-                </h3>
-                <p className="text-gray-700 font-medium">{stat.label}</p>
-              </div>
+                <div
+                  className="bg-white p-8 rounded-2xl shadow-lg hover-lift border-t-4 transition-all duration-300"
+                  style={{ borderColor: stat.color }}
+                >
+                  <h3 className="text-5xl font-bold mb-3" style={{ color: stat.color }}>
+                    {stat.value}
+                  </h3>
+                  <p className="text-gray-700 font-medium">{stat.label}</p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -119,12 +126,16 @@ export default function Outreach() {
           ) : (
             <div className="grid md:grid-cols-2 gap-8">
               {updates.map((update, idx) => (
-                <div
+                <ScrollReveal
                   key={update.id}
-                  className="stagger-item bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 transition-all duration-300"
-                  style={{ animationDelay: `${idx * 0.1}s` }}
+                  animation="fade-up"
+                  delay={idx * 150}
+                  duration={600}
                 >
-                  {update.image && (
+                  <div
+                    className="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 transition-all duration-300"
+                  >
+                    {update.image && (
                     <div className="h-48 overflow-hidden bg-gray-200">
                       <img
                         src={update.image}
@@ -153,7 +164,8 @@ export default function Outreach() {
                       </div>
                     )}
                   </div>
-                </div>
+                  </div>
+                </ScrollReveal>
               ))}
             </div>
           )}
@@ -161,7 +173,7 @@ export default function Outreach() {
       </section>
 
       {/* CTA SECTION */}
-      <section className="py-16 text-white" style={{ backgroundColor: '#95ba12' }}>
+      <section className="py-16 text-white" style={{ backgroundColor: '#e57d06' }}>
         <div className="max-w-4xl mx-auto px-4 text-center animate-fade-in-up">
           <h3 className="text-3xl font-bold mb-4">Get Involved in Our Outreach</h3>
           <p className="text-lg mb-8 text-gray-100">Make a difference in your community with us</p>

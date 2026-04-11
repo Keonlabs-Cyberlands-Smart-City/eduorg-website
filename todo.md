@@ -282,10 +282,10 @@
 - [x] Create useScrollReveal hook with Intersection Observer
 - [x] Create ScrollReveal component wrapper
 - [x] Update Bootcamp page with scroll animations
-- [ ] Update Sports page with scroll animations
-- [ ] Update Clubs page with scroll animations
+- [x] Update Sports page with scroll animations
+- [x] Update Clubs page with scroll animations
 - [ ] Update DayIn page with scroll animations
-- [ ] Update Outreach page with scroll animations
+- [x] Update Outreach page with scroll animations
 - [ ] Update Library page with scroll animations
 - [x] Add animation variants (fade, slide, scale, zoom)
 - [x] Write tests for scroll animations
