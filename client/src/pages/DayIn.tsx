@@ -51,76 +51,102 @@ export default function DayIn() {
     }
   };
 
-
-
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 font-sans">
+    <div className="min-h-screen flex flex-col bg-white font-sans">
       <Navbar />
 
-      {/* HERO */}
+      {/* HERO SECTION */}
       <section
-        className="h-[400px] bg-cover bg-center flex items-center justify-center text-white"
+        className="h-[500px] bg-cover bg-center flex items-center justify-center text-white relative overflow-hidden"
         style={{
           backgroundImage:
             "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Day in images_d7c99881.jpg')",
         }}
       >
-        <div className="bg-black/60 p-8 rounded-xl text-center">
-          <h2 className="text-4xl font-bold">Day-in Program</h2>
-          <p>Daily school engagement and campus visits</p>
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative z-10 bg-black/40 backdrop-blur-sm p-12 rounded-2xl text-center animate-fade-in-up max-w-2xl">
+          <h2 className="text-5xl font-bold mb-4" style={{ color: '#e57d06' }}>
+            Day-in Program
+          </h2>
+          <p className="text-xl text-gray-100">Daily school engagement and campus visits</p>
         </div>
       </section>
 
-      {/* STATISTICS */}
-      <section className="py-12 bg-white">
+      {/* STATISTICS SECTION */}
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Our Impact</h2>
+          <h2 className="text-4xl font-bold text-center mb-4" style={{ color: '#95ba12' }}>
+            Our Impact
+          </h2>
+          <p className="text-center text-gray-600 mb-12 text-lg">Building connections through daily school engagement</p>
+          
           <div className="grid md:grid-cols-4 gap-6">
-            <div className="bg-blue-50 p-6 rounded-lg text-center">
-              <h3 className="text-4xl font-bold text-blue-600">{stats.events}</h3>
-              <p className="text-gray-600">Day-in Events / Year</p>
-            </div>
-            <div className="bg-blue-50 p-6 rounded-lg text-center">
-              <h3 className="text-4xl font-bold text-blue-600">{stats.students}</h3>
-              <p className="text-gray-600">Students Participated</p>
-            </div>
-            <div className="bg-blue-50 p-6 rounded-lg text-center">
-              <h3 className="text-4xl font-bold text-blue-600">{stats.schools}</h3>
-              <p className="text-gray-600">Schools Visited</p>
-            </div>
-            <div className="bg-blue-50 p-6 rounded-lg text-center">
-              <h3 className="text-4xl font-bold text-blue-600">{stats.activities}</h3>
-              <p className="text-gray-600">Activities Conducted</p>
-            </div>
+            {[
+              { label: "Events / Year", value: stats.events, color: "#e57d06" },
+              { label: "Students Reached", value: stats.students, color: "#95ba12" },
+              { label: "Schools Visited", value: stats.schools, color: "#e57d06" },
+              { label: "Activities Conducted", value: stats.activities, color: "#95ba12" },
+            ].map((stat, idx) => (
+              <div
+                key={idx}
+                className="stagger-item bg-white p-8 rounded-2xl shadow-lg hover-lift border-t-4 transition-all duration-300"
+                style={{ borderColor: stat.color }}
+              >
+                <h3 className="text-5xl font-bold mb-3" style={{ color: stat.color }}>
+                  {stat.value}
+                </h3>
+                <p className="text-gray-700 font-medium">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* LATEST UPDATES */}
-      <section className="py-12 bg-gray-50">
+      {/* LATEST UPDATES SECTION */}
+      <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8">Latest Updates</h2>
+          <div className="mb-12 animate-fade-in-up">
+            <h2 className="text-4xl font-bold mb-3" style={{ color: '#95ba12' }}>
+              Latest Updates
+            </h2>
+            <div className="h-1 w-24" style={{ backgroundColor: '#e57d06' }}></div>
+          </div>
+
           {updates.length === 0 ? (
-            <p className="text-gray-500">No updates yet</p>
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">No updates yet. Check back soon!</p>
+            </div>
           ) : (
-            <div className="grid md:grid-cols-2 gap-6">
-              {updates.map((update) => (
-                <div key={update.id} className="bg-white rounded-lg shadow hover:shadow-lg transition">
+            <div className="grid md:grid-cols-2 gap-8">
+              {updates.map((update, idx) => (
+                <div
+                  key={update.id}
+                  className="stagger-item bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 transition-all duration-300"
+                  style={{ animationDelay: `${idx * 0.1}s` }}
+                >
                   {update.image && (
-                    <img
-                      src={update.image}
-                      alt={update.title}
-                      className="w-full h-48 object-cover rounded-t-lg"
-                    />
+                    <div className="h-48 overflow-hidden bg-gray-200">
+                      <img
+                        src={update.image}
+                        alt={update.title}
+                        className="w-full h-full object-cover hover-scale-lg transition-transform duration-500"
+                      />
+                    </div>
                   )}
-                  <div className="p-4">
-                    <h3 className="font-bold text-lg mb-2">{update.title}</h3>
-                    <p className="text-gray-600 text-sm mb-3 line-clamp-3">{update.content}</p>
-                    <p className="text-xs text-gray-500">Date: {update.date}</p>
+                  <div className="p-6">
+                    <h3 className="font-bold text-xl mb-3" style={{ color: '#e57d06' }}>
+                      {update.title}
+                    </h3>
+                    <p className="text-gray-700 text-sm mb-4 line-clamp-3">{update.content}</p>
+                    <p className="text-xs text-gray-500 mb-3">📅 {update.date}</p>
                     {update.tags && update.tags.length > 0 && (
-                      <div className="flex gap-2 mt-2 flex-wrap">
+                      <div className="flex gap-2 flex-wrap">
                         {update.tags.map((tag: string, idx: number) => (
-                          <span key={idx} className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">
+                          <span
+                            key={idx}
+                            className="text-xs px-3 py-1 rounded-full font-medium transition-all duration-300"
+                            style={{ backgroundColor: '#e5f7e5', color: '#95ba12' }}
+                          >
                             {tag}
                           </span>
                         ))}
@@ -131,6 +157,20 @@ export default function DayIn() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* CTA SECTION */}
+      <section className="py-16 text-white" style={{ backgroundColor: '#e57d06' }}>
+        <div className="max-w-4xl mx-auto px-4 text-center animate-fade-in-up">
+          <h3 className="text-3xl font-bold mb-4">Experience Our Day-in Program</h3>
+          <p className="text-lg mb-8 text-gray-100">Connect with students and experience our campus culture</p>
+          <button
+            className="px-8 py-3 bg-white rounded-lg font-bold transition-all duration-300 hover-scale"
+            style={{ color: '#e57d06' }}
+          >
+            Schedule a Visit
+          </button>
         </div>
       </section>
 
