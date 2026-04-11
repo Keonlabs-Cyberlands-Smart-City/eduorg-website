@@ -275,3 +275,152 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+
+/* Subtle Card Hover Effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* Program Card Hover Effect */
+.program-card-hover {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.program-card-hover:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 30px 40px -10px rgba(149, 186, 18, 0.2);
+}
+
+/* Statistics Card Hover Effect */
+.stat-card-hover {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card-hover:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 28px 35px -5px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card-hover:hover h3 {
+  transform: scale(1.08);
+  transition: transform 0.3s ease-out;
+}
+
+/* Update Card Hover Effect */
+.update-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.update-card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.15);
+}
+
+.update-card-hover:hover img {
+  transform: scale(1.05);
+  transition: transform 0.4s ease-out;
+}
+
+/* Testimonial Card Hover Effect */
+.testimonial-card-hover {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonial-card-hover:hover {
+  transform: translateY(-10px) rotateZ(1deg);
+  box-shadow: 0 30px 40px -10px rgba(0, 0, 0, 0.15);
+}
+
+/* Story Card Hover Effect */
+.story-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.story-card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.12);
+}
+
+/* Button Hover Effects */
+.btn-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.btn-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-hover:active {
+  transform: translateY(-1px);
+}
+
+/* Subtle Glow Effect on Hover */
+.glow-hover {
+  transition: all 0.3s ease-out;
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(149, 186, 18, 0.3);
+}
+
+/* Smooth Color Transition on Hover */
+.color-transition-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.color-transition-hover:hover {
+  filter: brightness(1.05);
+}
+
+/* Border Animation on Hover */
+.border-hover {
+  transition: all 0.3s ease-out;
+  border: 2px solid transparent;
+}
+
+.border-hover:hover {
+  border-color: #95ba12;
+  transform: translateY(-4px);
+}
+
+/* Overlay Hover Effect */
+.overlay-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(149, 186, 18, 0.1);
+  transition: left 0.3s ease-out;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.overlay-hover:hover::before {
+  left: 100%;
+}
+
+/* Icon Bounce on Hover */
+.icon-bounce-hover {
+  transition: all 0.3s ease-out;
+}
+
+.icon-bounce-hover:hover {
+  animation: bounce 0.6s ease-out;
+}

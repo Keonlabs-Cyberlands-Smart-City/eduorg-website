@@ -133,7 +133,7 @@ export default function Sports() {
                   duration={600}
                 >
                   <div
-                    className="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 transition-all duration-300"
+                    className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 update-card-hover"
                   >
                     {update.image && (
                     <div className="h-48 overflow-hidden bg-gray-200">

@@ -290,3 +290,14 @@
 - [x] Add animation variants (fade, slide, scale, zoom)
 - [x] Write tests for scroll animations
 - [ ] Test on different devices and browsers
+
+
+## Hover Effects Feature
+- [x] Create hover effect CSS utilities and animations
+- [x] Add hover effects to program cards on home page
+- [x] Add hover effects to statistics cards on all program pages
+- [x] Add hover effects to update cards on all program pages
+- [ ] Add hover effects to testimonial cards
+- [ ] Add hover effects to story cards in gallery
+- [x] Write tests for hover effects
+- [ ] Test hover effects on different devices and browsers

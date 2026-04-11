@@ -95,7 +95,7 @@ export default function Bootcamp() {
                 duration={600}
               >
                 <div
-                  className="bg-white p-8 rounded-2xl shadow-lg hover-lift border-t-4 transition-all duration-300"
+                  className="bg-white p-8 rounded-2xl shadow-lg border-t-4 stat-card-hover"
                   style={{ borderColor: stat.color }}
                 >
                   <h3 className="text-5xl font-bold mb-3" style={{ color: stat.color }}>
@@ -133,7 +133,7 @@ export default function Bootcamp() {
                   duration={600}
                 >
                   <div
-                    className="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 transition-all duration-300"
+                    className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 update-card-hover"
                   >
                     {update.image && (
                     <div className="h-48 overflow-hidden bg-gray-200">

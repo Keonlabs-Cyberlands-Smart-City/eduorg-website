@@ -109,8 +109,8 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-8 text-center" style={{color: '#c2e708'}}>Our Programs</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {programs.map((prog, idx) => (
-              <Link key={idx} href={prog.link} className="bg-white rounded-2xl shadow hover:shadow-lg overflow-hidden transition">
-                <img src={prog.img} alt={prog.name} className="w-full h-40 object-cover" />
+              <Link key={idx} href={prog.link} className="bg-white rounded-2xl shadow overflow-hidden program-card-hover">
+                <img src={prog.img} alt={prog.name} className="w-full h-40 object-cover hover-scale-lg" />
                 <div className="p-4">
                   <h3 className="text-xl font-bold" style={{color: '#e58a0b'}}>{prog.name}</h3>
                   <p className="text-gray-600">{prog.desc}</p>
