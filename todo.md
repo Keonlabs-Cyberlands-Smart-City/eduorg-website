@@ -316,3 +316,28 @@
 - [x] Write tests for parallax functionality
 - [ ] Test parallax performance on mobile devices
 - [ ] Verify parallax effect on all browsers
+
+
+## Scroll Progress Indicator Feature
+- [x] Create useScrollProgress hook
+- [x] Create ScrollProgressBar component
+- [x] Integrate progress bar into navbar
+- [x] Style progress bar with brand colors
+- [ ] Test progress indicator on all pages
+- [ ] Verify smooth animation
+
+## Dark Mode Toggle Feature
+- [ ] Create useDarkMode hook with localStorage
+- [ ] Create dark mode toggle button
+- [ ] Add to navbar
+- [ ] Update CSS variables for dark theme
+- [ ] Apply dark mode to all pages
+- [ ] Test theme persistence
+
+## Lazy Loading for Images Feature
+- [x] Create useLazyImage hook
+- [x] Implement blur-up effect
+- [ ] Add to all program cards
+- [ ] Add to testimonial images
+- [ ] Add to story gallery images
+- [ ] Test performance improvement

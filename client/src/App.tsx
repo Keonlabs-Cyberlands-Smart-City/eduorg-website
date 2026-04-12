@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import ScrollProgressBar from "./components/ScrollProgressBar";
 import Home from "./pages/Home";
 import Bootcamp from "./pages/Bootcamp";
 import Sports from "./pages/Sports";
@@ -48,6 +49,7 @@ function App() {
         defaultTheme="light"
         // switchable
       >
+        <ScrollProgressBar />
         <TooltipProvider>
           <Toaster />
           <Router />
