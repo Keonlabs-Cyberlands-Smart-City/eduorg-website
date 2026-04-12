@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FacebookFeed from "@/components/FacebookFeed";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import ParallaxHero from "@/components/ParallaxHero";
 import { Link } from "wouter";
 
 const programs = [
@@ -95,13 +96,17 @@ export default function Home() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="h-[500px] bg-cover bg-center flex items-center justify-center text-white" style={{ backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg')" }}>
+      <ParallaxHero
+        backgroundImage="https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/Main page image_d0d55fa9.jpg"
+        speed={0.5}
+        minHeight="500px"
+      >
         <div className="bg-black/60 p-8 rounded-xl text-center">
           <h2 className="text-5xl font-bold mb-4" style={{color: '#e57d06'}}>Make learning fun and engaging</h2>
           <p className="mb-4">Daily activities, bootcamps, clubs and more</p>
           <a href="#programs" className="bg-blue-600 px-6 py-2 rounded inline-block hover:bg-blue-700 transition">Explore Programs</a>
         </div>
-      </section>
+      </ParallaxHero>
 
       {/* PROGRAMS SECTION */}
       <section id="programs" className="py-12 px-6">

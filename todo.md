@@ -301,3 +301,18 @@
 - [ ] Add hover effects to story cards in gallery
 - [x] Write tests for hover effects
 - [ ] Test hover effects on different devices and browsers
+
+
+## Parallax Scrolling Effect Feature
+- [x] Create useParallax hook with scroll event listener
+- [x] Create ParallaxHero component wrapper
+- [x] Apply parallax effect to home page hero section
+- [x] Apply parallax effect to Bootcamp page hero
+- [x] Apply parallax effect to Sports page hero
+- [x] Apply parallax effect to Clubs page hero
+- [x] Apply parallax effect to DayIn page hero
+- [x] Apply parallax effect to Outreach page hero
+- [x] Apply parallax effect to Library page hero
+- [x] Write tests for parallax functionality
+- [ ] Test parallax performance on mobile devices
+- [ ] Verify parallax effect on all browsers
