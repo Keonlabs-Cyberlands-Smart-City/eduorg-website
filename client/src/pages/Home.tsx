@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import FacebookFeed from "@/components/FacebookFeed";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ParallaxHero from "@/components/ParallaxHero";
+import FAQSection from "@/components/FAQSection";
+import NewsletterForm from "@/components/NewsletterForm";
 import { Link } from "wouter";
 
 const programs = [
@@ -207,6 +209,24 @@ export default function Home() {
                 <p className="text-gray-600">{coordinator.role}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SECTION */}
+      <FAQSection />
+
+      {/* NEWSLETTER SECTION */}
+      <section className="py-16 px-4 bg-gradient-to-r from-green-50 to-orange-50 dark:from-gray-800 dark:to-gray-700">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-4" style={{ color: "#95ba12" }}>
+            Stay Updated
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-8">
+            Subscribe to our newsletter to receive updates about new programs, events, and student achievements
+          </p>
+          <div className="flex justify-center">
+            <NewsletterForm />
           </div>
         </div>
       </section>

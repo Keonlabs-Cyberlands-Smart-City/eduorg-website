@@ -327,12 +327,12 @@
 - [ ] Verify smooth animation
 
 ## Dark Mode Toggle Feature
-- [ ] Create useDarkMode hook with localStorage
-- [ ] Create dark mode toggle button
-- [ ] Add to navbar
-- [ ] Update CSS variables for dark theme
+- [x] Create useDarkMode hook with localStorage
+- [x] Create dark mode toggle button
+- [x] Add to navbar
+- [x] Update CSS variables for dark theme
 - [ ] Apply dark mode to all pages
-- [ ] Test theme persistence
+- [x] Test theme persistence
 
 ## Lazy Loading for Images Feature
 - [x] Create useLazyImage hook
@@ -341,3 +341,21 @@
 - [ ] Add to testimonial images
 - [ ] Add to story gallery images
 - [ ] Test performance improvement
+
+
+## FAQ Section Feature
+- [x] Create FAQSection component with 6 items
+- [x] Add accordion expand/collapse functionality
+- [x] Add to home page
+- [x] Style with brand colors
+- [x] Add dark mode support
+- [x] Test functionality
+
+## Newsletter Subscription Feature
+- [x] Create NewsletterForm component
+- [x] Add email validation
+- [x] Add loading state
+- [x] Add success message
+- [x] Add to home page
+- [x] Style with brand colors
+- [x] Test functionality
