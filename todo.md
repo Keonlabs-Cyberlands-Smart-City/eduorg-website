@@ -376,3 +376,15 @@
 - [x] Add font-weight to nav links for better visibility
 - [x] Test home button navigation on all pages
 - [x] Verify dark mode theme consistency
+
+## Enhanced File Upload for Stories
+- [x] Add drag-and-drop support for image, video, and audio uploads
+- [x] Display file names and sizes in upload preview
+- [x] Show upload progress indicators during file upload
+- [x] Add visual feedback for drag-active state (highlight drop zone)
+- [x] Improve error handling with detailed validation messages
+- [x] Add upload summary showing all selected media files
+- [x] Show character count for story content textarea
+- [x] Add file format hints for each media type
+- [x] Implement better visual states (success, error, loading)
+- [x] All tests passing (210 tests)

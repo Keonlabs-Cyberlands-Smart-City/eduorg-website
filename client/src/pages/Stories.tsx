@@ -3,7 +3,7 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Upload, Lock, X, FileUp } from "lucide-react";
+import { Upload, Lock, X, FileUp, CheckCircle, AlertCircle } from "lucide-react";
 
 const CATEGORIES = [
   { value: "teacher", label: "Teacher" },
@@ -18,6 +18,8 @@ interface FileUpload {
   file: File;
   preview: string;
   type: "image" | "video" | "audio";
+  size: string;
+  uploadProgress?: number;
 }
 
 export default function Stories() {
@@ -40,10 +42,21 @@ export default function Stories() {
   }>({});
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<Record<string, number>>({});
+  const [dragActive, setDragActive] = useState<Record<string, boolean>>({});
+  
   const imageInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
   const audioInputRef = useRef<HTMLInputElement>(null);
   const submitStory = trpc.stories.submit.useMutation();
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + " " + sizes[i];
+  };
 
   const handleKeySubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,7 +87,10 @@ export default function Stories() {
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    processFile(file, fileType);
+  };
 
+  const processFile = (file: File, fileType: "image" | "video" | "audio") => {
     // Validate file size (max 50MB)
     if (file.size > 50 * 1024 * 1024) {
       toast.error("File size must be less than 50MB");
@@ -89,7 +105,7 @@ export default function Stories() {
     };
 
     if (!validTypes[fileType].includes(file.type)) {
-      toast.error(`Invalid ${fileType} format`);
+      toast.error(`Invalid ${fileType} format. Supported: ${validTypes[fileType].join(", ")}`);
       return;
     }
 
@@ -98,9 +114,15 @@ export default function Stories() {
       const preview = event.target?.result as string;
       setUploadedFiles((prev) => ({
         ...prev,
-        [fileType]: { file, preview, type: fileType },
+        [fileType]: { 
+          file, 
+          preview, 
+          type: fileType,
+          size: formatFileSize(file.size),
+          uploadProgress: 0
+        },
       }));
-      toast.success(`${fileType.charAt(0).toUpperCase() + fileType.slice(1)} uploaded`);
+      toast.success(`${fileType.charAt(0).toUpperCase() + fileType.slice(1)} uploaded successfully`);
     };
     reader.readAsDataURL(file);
   };
@@ -111,9 +133,37 @@ export default function Stories() {
       delete newFiles[fileType];
       return newFiles;
     });
+    setUploadProgress((prev) => {
+      const newProgress = { ...prev };
+      delete newProgress[fileType];
+      return newProgress;
+    });
     if (fileType === "image" && imageInputRef.current) imageInputRef.current.value = "";
     if (fileType === "video" && videoInputRef.current) videoInputRef.current.value = "";
     if (fileType === "audio" && audioInputRef.current) audioInputRef.current.value = "";
+  };
+
+  const handleDrag = (e: React.DragEvent, fileType: string, isActive: boolean) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive((prev) => ({
+      ...prev,
+      [fileType]: isActive,
+    }));
+  };
+
+  const handleDrop = (e: React.DragEvent, fileType: "image" | "video" | "audio") => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive((prev) => ({
+      ...prev,
+      [fileType]: false,
+    }));
+
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      processFile(files[0], fileType);
+    }
   };
 
   const uploadFileToServer = async (file: File, fileType: string): Promise<string | null> => {
@@ -201,6 +251,90 @@ export default function Stories() {
     }
   };
 
+  const renderFileUploadBox = (
+    fileType: "image" | "video" | "audio",
+    inputRef: React.RefObject<HTMLInputElement | null>,
+    icon: string,
+    label: string,
+    formats: string
+  ) => {
+    const file = uploadedFiles[fileType];
+    const isActive = dragActive[fileType] || false;
+
+    return (
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          {icon} {label}
+        </label>
+        {file ? (
+          <div className="bg-green-50 border-2 border-green-500 rounded-lg p-4">
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <CheckCircle size={20} className="text-green-500" />
+                  <span className="font-medium text-gray-700">{file.file.name}</span>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">Size: {file.size}</p>
+                {file.uploadProgress !== undefined && file.uploadProgress > 0 && file.uploadProgress < 100 && (
+                  <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                    <div
+                      className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${file.uploadProgress}%` }}
+                    />
+                  </div>
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={() => removeFile(fileType)}
+                className="bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition flex-shrink-0"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div
+            onDragEnter={(e) => handleDrag(e, fileType, true)}
+            onDragLeave={(e) => handleDrag(e, fileType, false)}
+            onDragOver={(e) => handleDrag(e, fileType, true)}
+            onDrop={(e) => handleDrop(e, fileType)}
+            className={`w-full px-4 py-6 border-2 border-dashed rounded-lg text-center transition cursor-pointer ${
+              isActive
+                ? "border-orange-500 bg-orange-50"
+                : "border-gray-300 hover:border-orange-500 hover:bg-orange-50"
+            }`}
+          >
+            <button
+              type="button"
+              onClick={() => inputRef.current?.click()}
+              className="w-full"
+            >
+              <FileUp size={28} className="mx-auto mb-2" style={{ color: "#e07f10" }} />
+              <p className="text-sm font-medium text-gray-700 mb-1">
+                {isActive ? "Drop your file here" : "Click to upload or drag and drop"}
+              </p>
+              <p className="text-xs text-gray-500">{formats}</p>
+            </button>
+          </div>
+        )}
+        <input
+          ref={inputRef}
+          type="file"
+          accept={
+            fileType === "image"
+              ? "image/*"
+              : fileType === "video"
+              ? "video/*"
+              : "audio/*"
+          }
+          onChange={(e) => handleFileSelect(e, fileType)}
+          className="hidden"
+        />
+      </div>
+    );
+  };
+
   return (
     <>
       <Navbar />
@@ -235,7 +369,10 @@ export default function Stories() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                   {keyError && (
-                    <p className="text-red-500 text-sm mt-2">{keyError}</p>
+                    <p className="text-red-500 text-sm mt-2 flex items-center gap-2">
+                      <AlertCircle size={16} />
+                      {keyError}
+                    </p>
                   )}
                 </div>
 
@@ -341,133 +478,73 @@ export default function Stories() {
                     onChange={handleInputChange}
                     placeholder="Tell your story... (minimum 10 characters)"
                     rows={6}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
                   />
+                  <p className="text-xs text-gray-500 mt-1">
+                    {formData.content.length} characters
+                  </p>
                 </div>
 
                 {/* File Uploads */}
                 <div className="border-t pt-6">
-                  <h3 className="font-semibold text-gray-700 mb-4">Upload Media (Optional)</h3>
+                  <h3 className="font-semibold text-lg text-gray-700 mb-4 flex items-center gap-2">
+                    <Upload size={20} style={{ color: "#e07f10" }} />
+                    Upload Media (Optional)
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-6">
+                    You can upload images, videos, and audio files to enhance your story. All files are optional.
+                  </p>
 
                   {/* Image Upload */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      📷 Image
-                    </label>
-                    {uploadedFiles.image ? (
-                      <div className="relative inline-block">
-                        <img
-                          src={uploadedFiles.image.preview}
-                          alt="Preview"
-                          className="h-32 w-32 object-cover rounded-lg border-2 border-green-500"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => removeFile("image")}
-                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                        >
-                          <X size={16} />
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => imageInputRef.current?.click()}
-                        className="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg text-center hover:border-orange-500 transition"
-                      >
-                        <FileUp size={24} className="mx-auto mb-2" style={{ color: "#e07f10" }} />
-                        <p className="text-sm text-gray-600">Click to upload image</p>
-                        <p className="text-xs text-gray-500">JPG, PNG, GIF, WebP (max 50MB)</p>
-                      </button>
-                    )}
-                    <input
-                      ref={imageInputRef}
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleFileSelect(e, "image")}
-                      className="hidden"
-                    />
-                  </div>
+                  {renderFileUploadBox(
+                    "image",
+                    imageInputRef,
+                    "📷",
+                    "Image",
+                    "JPG, PNG, GIF, WebP (max 50MB)"
+                  )}
 
                   {/* Video Upload */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      🎬 Video
-                    </label>
-                    {uploadedFiles.video ? (
-                      <div className="relative inline-block">
-                        <div className="h-32 w-32 bg-gray-200 rounded-lg border-2 border-green-500 flex items-center justify-center">
-                          <p className="text-sm text-gray-600">Video ready</p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => removeFile("video")}
-                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                        >
-                          <X size={16} />
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => videoInputRef.current?.click()}
-                        className="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg text-center hover:border-orange-500 transition"
-                      >
-                        <FileUp size={24} className="mx-auto mb-2" style={{ color: "#e07f10" }} />
-                        <p className="text-sm text-gray-600">Click to upload video</p>
-                        <p className="text-xs text-gray-500">MP4, WebM, MOV (max 50MB)</p>
-                      </button>
-                    )}
-                    <input
-                      ref={videoInputRef}
-                      type="file"
-                      accept="video/*"
-                      onChange={(e) => handleFileSelect(e, "video")}
-                      className="hidden"
-                    />
-                  </div>
+                  {renderFileUploadBox(
+                    "video",
+                    videoInputRef,
+                    "🎬",
+                    "Video",
+                    "MP4, WebM, MOV (max 50MB)"
+                  )}
 
                   {/* Audio Upload */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      🎙️ Audio
-                    </label>
-                    {uploadedFiles.audio ? (
-                      <div className="relative inline-block">
-                        <div className="h-32 w-32 bg-gray-200 rounded-lg border-2 border-green-500 flex items-center justify-center">
-                          <p className="text-sm text-gray-600">Audio ready</p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => removeFile("audio")}
-                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                        >
-                          <X size={16} />
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => audioInputRef.current?.click()}
-                        className="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg text-center hover:border-orange-500 transition"
-                      >
-                        <FileUp size={24} className="mx-auto mb-2" style={{ color: "#e07f10" }} />
-                        <p className="text-sm text-gray-600">Click to upload audio</p>
-                        <p className="text-xs text-gray-500">MP3, WAV, OGG, M4A (max 50MB)</p>
-                      </button>
-                    )}
-                    <input
-                      ref={audioInputRef}
-                      type="file"
-                      accept="audio/*"
-                      onChange={(e) => handleFileSelect(e, "audio")}
-                      className="hidden"
-                    />
-                  </div>
+                  {renderFileUploadBox(
+                    "audio",
+                    audioInputRef,
+                    "🎙️",
+                    "Audio",
+                    "MP3, WAV, OGG, M4A (max 50MB)"
+                  )}
+
+                  {/* Upload Summary */}
+                  {(uploadedFiles.image || uploadedFiles.video || uploadedFiles.audio) && (
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
+                      <p className="text-sm font-medium text-blue-900 mb-2">
+                        ✓ Media files ready to upload
+                      </p>
+                      <ul className="text-sm text-blue-800 space-y-1">
+                        {uploadedFiles.image && (
+                          <li>• Image: {uploadedFiles.image.file.name}</li>
+                        )}
+                        {uploadedFiles.video && (
+                          <li>• Video: {uploadedFiles.video.file.name}</li>
+                        )}
+                        {uploadedFiles.audio && (
+                          <li>• Audio: {uploadedFiles.audio.file.name}</li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
                 {/* Buttons */}
-                <div className="flex gap-4 pt-6">
+                <div className="flex gap-4 pt-6 border-t">
                   <button
                     type="button"
                     onClick={() => {
