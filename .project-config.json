@@ -1,0 +1,48 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [
+    "db",
+    "server",
+    "user"
+  ],
+  "dev_command": "pnpm run dev",
+  "env_vars": {
+    "DATABASE_URL": "mysql://HkCx7BCLaJJJdWP.0a27b6c8b190:I16xIQqfPk47UkU8Gp4T@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/epjCjfnCCf8LFtGtGELo3e?ssl={\"rejectUnauthorized\":true}"
+  },
+  "experiments": [
+    "no_db_push"
+  ],
+  "git_remote": {
+    "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663455556448/epjCjfnCCf8LFtGtGELo3e",
+    "access_key_id": "ASIAZV3A2ECZIWXPT42F",
+    "secret_access_key": "jIEWdE5dsjT7EdjsaInHhP/r54qgWFYrou+ZIRir",
+    "session_token": "IQoJb3JpZ2luX2VjEMH//////////wEaCXVzLWVhc3QtMSJHMEUCIQCjfkWcIvS+ATprATkxcS6VnIqqoqULuHBLdt17oq7P0QIgKQqaHNe2GanF3tMyCDxcbsxLpQz9xZQ2lSejttm1PkMq/gMIiv//////////ARAEGgw2NjUzODYwOTg4NjYiDHA3osPZV9rc5iNf7SrSA4YHN/YMAwLWsrUS2eMajYsQD/W4wgvImqvNlNJBWn7H/Ch7Cg1kjZABhivtLedhKAPwMZ4+TtftnBh2WKB6M94+6ulRLmRvGNdTC9S3VMhwh7WEOWPEuwqxLKCcymdsy+F4I9gzbd6oFoIvkUjy8b82An/ocBS8ejlONejG5NHUoJMfIgrwD5Tmil7bvOI8ueYzXuy8LYu36rAqWkY98U4VfZih3V4RIk68gMJYcBquBszaauk1kXNvPtKJUpyfZOgN9OXcT4KYBx8pyrRsv6ljKrwnwpPkdJVJtOiHX/EPfv9tuMNaa7otHw413c/Uv9DjUFU69Zhf1pl/uUoYe4oQLz6pHcgnr3ZLHQcri6+s5Ks6dB2wupSjlhO6WCuSA/UU0/wmOQOE4gQ5y67AFRy7pIzWjMX3uFL/ABNqwlvwL0Zg/QLBcGG4j+eYeVcGN9KpGQmpE4iAc1ajMVgKYA3j8WSMUiETx5CInOZiYPtJvkY+8Wt2v5UF5r7l2RtjznrZBzd/UPPU/T4P456/i01g1XoOlNbDZPXI6mHAhsCDoBlSPf36bS3EAVsh+blPJGkOUeniXLAtAPqRXms4cl390NOo+J4FSXAlfRJVMZVbrMQwlteg0AY6nQGviRP7YwDXu85iZ1cVjwZWrR7mkjsG6PecdfMZf3dxnafvOCnRqZRVonJ2PDAm2KwulWXtP1G24tCkNrBeZ5fcG5AmpsLUm3NDqGKxituWuAdhGOGEhAFruBQkcPln3p5sneYAyg+AyZSRZQIrwtbwZ6SHLwWAoNJ+tyWHZenKjyyqDVLHEBz+dAsjTbi8aOVKY1Nvjz7C0YRBVGNn",
+    "expiration": "2026-05-16T20:32:22.000Z"
+  },
+  "name": "eduorg-website",
+  "path": "/home/ubuntu/eduorg-website",
+  "port": 3000,
+  "secrets": {
+    "ADMIN_EMAIL": "keon202508@gmail.com",
+    "BUILT_IN_FORGE_API_KEY": "PvuYGHGaDayi9cT5mZ3Vqp",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "kg88SxgUgqgtfyeSPswSnE",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Keon",
+    "OWNER_OPEN_ID": "jfZJtW9795tosjQhHgywGC",
+    "SMTP_HOST": "2",
+    "SMTP_PASSWORD": "2105",
+    "SMTP_PORT": "1",
+    "SMTP_USER": "2",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "a732b202-aaf8-44ac-ae97-aeeceb03a1f0",
+    "VITE_APP_ID": "epjCjfnCCf8LFtGtGELo3e",
+    "VITE_APP_LOGO": "https://files.manuscdn.com/user_upload_by_module/web_dev_logo/310519663455556448/LDAFYMaxMKrhRsWJ.png",
+    "VITE_APP_TITLE": "EduOrg - Empowering Education",
+    "VITE_FRONTEND_FORGE_API_KEY": "DEFa6iSaJYBVzRqXxhkQ5t",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-db-user",
+  "test_command": "pnpm test"
+}

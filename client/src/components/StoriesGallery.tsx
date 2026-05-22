@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
 import { Search, Filter, Eye, Calendar } from "lucide-react";
+import StorySkeleton from "./StorySkeleton";
 
 interface Story {
   id: number;
@@ -70,8 +71,12 @@ export default function StoriesGallery() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center py-12">
-        <div className="text-gray-500">Loading stories...</div>
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <StorySkeleton key={i} />
+          ))}
+        </div>
       </div>
     );
   }
