@@ -368,3 +368,11 @@
 - [x] Add loading state management
 - [x] Write tests for skeleton loader
 - [x] Verify smooth transition from skeleton to content
+
+## Home Button and Navbar Fixes
+- [x] Fix home button styling and navigation
+- [x] Add dark mode support to navbar
+- [x] Add hover effects to all nav links
+- [x] Add font-weight to nav links for better visibility
+- [x] Test home button navigation on all pages
+- [x] Verify dark mode theme consistency
