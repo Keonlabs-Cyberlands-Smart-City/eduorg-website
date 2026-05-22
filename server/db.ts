@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, teamMembers, InsertTeamMember } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -87,6 +87,98 @@ export async function getUserByOpenId(openId: string) {
   const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
 
   return result.length > 0 ? result[0] : undefined;
+}
+
+// Team Members queries
+export async function getAllTeamMembers() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get team members: database not available");
+    return [];
+  }
+
+  try {
+    const result = await db
+      .select()
+      .from(teamMembers)
+      .where(eq(teamMembers.status, "active"))
+      .orderBy(desc(teamMembers.createdAt));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get team members:", error);
+    return [];
+  }
+}
+
+export async function getTeamMembersByCategory(category: "teacher" | "manager" | "coordinator") {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get team members: database not available");
+    return [];
+  }
+
+  try {
+    const result = await db
+      .select()
+      .from(teamMembers)
+      .where(eq(teamMembers.category, category))
+      .orderBy(desc(teamMembers.createdAt));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get team members by category:", error);
+    return [];
+  }
+}
+
+export async function createTeamMember(data: InsertTeamMember) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create team member: database not available");
+    return null;
+  }
+
+  try {
+    const result = await db.insert(teamMembers).values(data);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to create team member:", error);
+    throw error;
+  }
+}
+
+export async function updateTeamMember(id: number, data: Partial<InsertTeamMember>) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot update team member: database not available");
+    return null;
+  }
+
+  try {
+    const result = await db
+      .update(teamMembers)
+      .set(data)
+      .where(eq(teamMembers.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to update team member:", error);
+    throw error;
+  }
+}
+
+export async function deleteTeamMember(id: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot delete team member: database not available");
+    return null;
+  }
+
+  try {
+    const result = await db.delete(teamMembers).where(eq(teamMembers.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to delete team member:", error);
+    throw error;
+  }
 }
 
 // TODO: add feature queries here as your schema grows.

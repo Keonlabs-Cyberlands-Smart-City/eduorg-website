@@ -388,3 +388,17 @@
 - [x] Add file format hints for each media type
 - [x] Implement better visual states (success, error, loading)
 - [x] All tests passing (210 tests)
+
+## Team Members Management System
+- [x] Create teamMembers database table with status tracking
+- [x] Add team member database helper functions (CRUD operations)
+- [x] Create tRPC endpoints for team member management (admin only)
+- [x] Add public endpoints to fetch team members by category
+- [x] Support photo upload URLs for team members
+- [x] Add description field for team member bios
+- [x] Add email and phone fields for contact info
+- [x] Implement status tracking for promotions and departures
+- [ ] Create admin dashboard page for team member management
+- [ ] Add team member upload form with image upload
+- [ ] Update Home page to display team members from database
+- [ ] Add edit/delete functionality for admin users

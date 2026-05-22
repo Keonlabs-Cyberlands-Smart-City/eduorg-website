@@ -21,6 +21,13 @@ import {
   deleteStory,
   getPendingStories,
 } from "./db.stories";
+import {
+  getAllTeamMembers,
+  getTeamMembersByCategory,
+  createTeamMember,
+  updateTeamMember,
+  deleteTeamMember,
+} from "./db";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -430,6 +437,142 @@ export const appRouter = router({
           return {
             success: false,
             message: "Failed to delete story",
+          };
+        }
+      }),
+  }),
+
+  teamMembers: router({
+    // Get all active team members
+    getAll: publicProcedure.query(async () => {
+      try {
+        const members = await getAllTeamMembers();
+        return {
+          success: true,
+          members,
+        };
+      } catch (error) {
+        console.error("Error fetching team members:", error);
+        return {
+          success: false,
+          members: [],
+        };
+      }
+    }),
+
+    // Get team members by category
+    getByCategory: publicProcedure
+      .input(z.object({ category: z.enum(["teacher", "manager", "coordinator"]) }))
+      .query(async ({ input }) => {
+        try {
+          const members = await getTeamMembersByCategory(input.category);
+          return {
+            success: true,
+            members,
+          };
+        } catch (error) {
+          console.error("Error fetching team members by category:", error);
+          return {
+            success: false,
+            members: [],
+          };
+        }
+      }),
+
+    // Create team member (admin only)
+    create: protectedProcedure
+      .input(
+        z.object({
+          name: z.string().min(1),
+          role: z.string().min(1),
+          category: z.enum(["teacher", "manager", "coordinator"]),
+          photoUrl: z.string().optional(),
+          description: z.string().optional(),
+          email: z.string().email().optional(),
+          phone: z.string().optional(),
+        })
+      )
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          return {
+            success: false,
+            message: "Unauthorized",
+          };
+        }
+        try {
+          const result = await createTeamMember(input);
+          return {
+            success: true,
+            message: "Team member created successfully",
+            memberId: (result as any)?.insertId,
+          };
+        } catch (error) {
+          console.error("Error creating team member:", error);
+          return {
+            success: false,
+            message: "Failed to create team member",
+          };
+        }
+      }),
+
+    // Update team member (admin only)
+    update: protectedProcedure
+      .input(
+        z.object({
+          id: z.number(),
+          name: z.string().optional(),
+          role: z.string().optional(),
+          photoUrl: z.string().optional(),
+          description: z.string().optional(),
+          status: z.enum(["active", "inactive", "promoted", "left"]).optional(),
+          email: z.string().email().optional(),
+          phone: z.string().optional(),
+        })
+      )
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          return {
+            success: false,
+            message: "Unauthorized",
+          };
+        }
+        try {
+          const { id, ...data } = input;
+          const result = await updateTeamMember(id, data);
+          return {
+            success: true,
+            message: "Team member updated successfully",
+          };
+        } catch (error) {
+          console.error("Error updating team member:", error);
+          return {
+            success: false,
+            message: "Failed to update team member",
+          };
+        }
+      }),
+
+    // Delete team member (admin only)
+    delete: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user?.role !== "admin") {
+          return {
+            success: false,
+            message: "Unauthorized",
+          };
+        }
+        try {
+          const result = await deleteTeamMember(input.id);
+          return {
+            success: true,
+            message: "Team member deleted successfully",
+          };
+        } catch (error) {
+          console.error("Error deleting team member:", error);
+          return {
+            success: false,
+            message: "Failed to delete team member",
           };
         }
       }),

@@ -69,3 +69,23 @@ export const stories = mysqlTable("stories", {
 
 export type Story = typeof stories.$inferSelect;
 export type InsertStory = typeof stories.$inferInsert;
+
+/**
+ * Team members table for managing staff, teachers, managers, and coordinators
+ */
+export const teamMembers = mysqlTable("teamMembers", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  role: varchar("role", { length: 255 }).notNull(),
+  category: mysqlEnum("category", ["teacher", "manager", "coordinator"]).notNull(),
+  photoUrl: varchar("photoUrl", { length: 512 }),
+  description: text("description"),
+  status: mysqlEnum("status", ["active", "inactive", "promoted", "left"]).default("active"),
+  email: varchar("email", { length: 320 }),
+  phone: varchar("phone", { length: 20 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type TeamMember = typeof teamMembers.$inferSelect;
+export type InsertTeamMember = typeof teamMembers.$inferInsert;
