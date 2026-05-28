@@ -398,7 +398,12 @@
 - [x] Add description field for team member bios
 - [x] Add email and phone fields for contact info
 - [x] Implement status tracking for promotions and departures
-- [ ] Create admin dashboard page for team member management
-- [ ] Add team member upload form with image upload
+- [x] Create admin dashboard page for team member management
+- [x] Add team member upload form with image upload
+- [x] Add drag-and-drop photo upload support
+- [x] Add edit/delete functionality for admin users
+- [x] Group team members by category (teachers, managers, coordinators)
+- [x] Display member count for each category
+- [x] Show status badges with color coding
 - [ ] Update Home page to display team members from database
-- [ ] Add edit/delete functionality for admin users
+- [ ] Add team member detail modal/popup

@@ -16,6 +16,7 @@ import Stories from "./pages/Stories";
 import StoriesGalleryPage from "./pages/StoriesGallery";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
+import AdminTeamManagement from "./pages/AdminTeamManagement";
 
 function Router() {
   return (
@@ -31,6 +32,7 @@ function Router() {
       <Route path={"/stories-gallery"} component={StoriesGalleryPage} />
       <Route path={"/admin-login"} component={AdminLogin} />
       <Route path={"/admin"} component={Admin} />
+      <Route path={"/admin/team"} component={AdminTeamManagement} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
