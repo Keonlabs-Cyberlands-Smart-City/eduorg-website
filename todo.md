@@ -412,3 +412,20 @@
 - [x] Add edit button that appears on hover for admins
 - [x] Real-time updates when team members are added/edited
 - [ ] Add team member detail modal/popup
+
+## Website Redesign - Unit-Inspired Modern Structure
+- [x] Remove edit functionality from Home page (admin-only)
+- [x] Create modern hero carousel with smooth transitions
+- [x] Add carousel navigation arrows and slide indicators
+- [x] Redesign programs section with hover effects
+- [x] Modernize team section with image scaling animations
+- [x] Update contact form with modern styling
+- [x] Add fade-in animations to hero text
+- [x] Implement smooth scroll behavior
+- [ ] Update About page with modern design
+- [ ] Update Contact page with modern design
+- [ ] Add scroll-triggered animations to sections
+- [ ] Update Stories page with modern layout
+- [ ] Update Admin pages with consistent design
+- [ ] Add smooth transitions between pages
+- [ ] Test all pages and animations
