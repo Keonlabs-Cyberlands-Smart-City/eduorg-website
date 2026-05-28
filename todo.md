@@ -405,5 +405,10 @@
 - [x] Group team members by category (teachers, managers, coordinators)
 - [x] Display member count for each category
 - [x] Show status badges with color coding
-- [ ] Update Home page to display team members from database
+- [x] Update Home page to display team members from database
+- [x] Add inline edit functionality for admins on Home page
+- [x] Display team members grouped by category (teachers, managers, coordinators)
+- [x] Filter to show only active team members
+- [x] Add edit button that appears on hover for admins
+- [x] Real-time updates when team members are added/edited
 - [ ] Add team member detail modal/popup
