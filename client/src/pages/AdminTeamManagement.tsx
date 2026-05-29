@@ -3,12 +3,7 @@ import { useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Loader2, Trash2, Edit2, Plus, Upload, X } from "lucide-react";
 
@@ -107,8 +102,6 @@ export default function AdminTeamManagement() {
 
   const uploadPhotoToS3 = async (file: File): Promise<string> => {
     try {
-      // For now, we'll use a data URL since we don't have direct S3 access in the client
-      // In production, you'd upload to S3 via the server
       const reader = new FileReader();
       return new Promise((resolve, reject) => {
         reader.onload = () => {
@@ -130,7 +123,6 @@ export default function AdminTeamManagement() {
     try {
       let photoUrl = formData.photoUrl;
 
-      // Upload photo if a new file was selected
       if (photoFile) {
         photoUrl = await uploadPhotoToS3(photoFile);
       }
@@ -141,19 +133,16 @@ export default function AdminTeamManagement() {
       };
 
       if (editingId) {
-        // Update existing team member
         await updateMutation.mutateAsync({
           id: editingId,
           ...submitData,
         });
         toast.success("Team member updated successfully!");
       } else {
-        // Create new team member
         await createMutation.mutateAsync(submitData);
         toast.success("Team member added successfully!");
       }
 
-      // Refresh team members list
       getAllQuery.refetch();
       resetForm();
       setIsDialogOpen(false);
@@ -229,54 +218,59 @@ export default function AdminTeamManagement() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-8">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-16">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-start mb-12">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900">Team Management</h1>
-            <p className="text-gray-600 mt-2">Add, edit, and manage your team members</p>
+            <h1 className="text-5xl font-bold mb-2">Team Management</h1>
+            <p className="text-xl text-gray-600">Add, edit, and manage your team members</p>
           </div>
-          <Button onClick={handleLogout} variant="outline">
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-bold transition"
+          >
             Logout
-          </Button>
+          </button>
         </div>
 
         {/* Add Team Member Button */}
-        <div className="mb-8">
+        <div className="mb-12">
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button
+              <button
                 onClick={() => {
                   resetForm();
                   setIsDialogOpen(true);
                 }}
-                className="bg-blue-600 hover:bg-blue-700"
+                className="bg-black hover:bg-gray-900 text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition"
               >
-                <Plus className="w-4 h-4 mr-2" />
+                <Plus className="w-5 h-5" />
                 Add Team Member
-              </Button>
+              </button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle>{editingId ? "Edit Team Member" : "Add New Team Member"}</DialogTitle>
+                <DialogTitle className="text-3xl font-bold">
+                  {editingId ? "Edit Team Member" : "Add New Team Member"}
+                </DialogTitle>
               </DialogHeader>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Photo Upload */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Photo</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">Photo</label>
                   <div
                     onDragEnter={handleDrag}
                     onDragLeave={handleDrag}
                     onDragOver={handleDrag}
                     onDrop={handleDrop}
-                    className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition ${
+                    className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition ${
                       dragActive
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-300 bg-gray-50 hover:border-gray-400"
+                        ? "border-black bg-gray-100"
+                        : "border-gray-300 bg-gray-50 hover:border-black"
                     }`}
                   >
                     {photoPreview ? (
@@ -284,7 +278,7 @@ export default function AdminTeamManagement() {
                         <img
                           src={photoPreview}
                           alt="Preview"
-                          className="h-32 w-32 object-cover rounded-lg"
+                          className="h-40 w-40 object-cover rounded-lg"
                         />
                         <button
                           type="button"
@@ -292,17 +286,18 @@ export default function AdminTeamManagement() {
                             setPhotoPreview("");
                             setPhotoFile(null);
                           }}
-                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600"
                         >
                           <X className="w-4 h-4" />
                         </button>
                       </div>
                     ) : (
                       <div>
-                        <Upload className="w-8 h-8 mx-auto text-gray-400 mb-2" />
-                        <p className="text-sm text-gray-600">
+                        <Upload className="w-10 h-10 mx-auto text-gray-600 mb-3" />
+                        <p className="text-sm font-semibold text-gray-700 mb-1">
                           Drag and drop your photo here, or click to select
                         </p>
+                        <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                       </div>
                     )}
                     <input
@@ -322,277 +317,203 @@ export default function AdminTeamManagement() {
 
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Name *</label>
-                  <Input
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
+                  <input
+                    type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Enter team member name"
                     required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   />
                 </div>
 
                 {/* Role */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Role *</label>
-                  <Input
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Role *</label>
+                  <input
+                    type="text"
                     value={formData.role}
                     onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                     placeholder="e.g., Mathematics Teacher, Operations Manager"
                     required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   />
                 </div>
 
                 {/* Category */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Category *</label>
-                  <Select
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Category *</label>
+                  <select
                     value={formData.category}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, category: value as any })
-                    }
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="teacher">Teacher</SelectItem>
-                      <SelectItem value="manager">Manager</SelectItem>
-                      <SelectItem value="coordinator">Coordinator</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    <option value="teacher">Teacher</option>
+                    <option value="manager">Manager</option>
+                    <option value="coordinator">Coordinator</option>
+                  </select>
                 </div>
 
                 {/* Status */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                  <Select
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Status</label>
+                  <select
                     value={formData.status}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, status: value as any })
-                    }
+                    onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="active">Active</SelectItem>
-                      <SelectItem value="inactive">Inactive</SelectItem>
-                      <SelectItem value="promoted">Promoted</SelectItem>
-                      <SelectItem value="left">Left</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="promoted">Promoted</option>
+                    <option value="left">Left</option>
+                  </select>
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                  <Input
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                  <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="team.member@example.com"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   />
                 </div>
 
                 {/* Phone */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                  <Input
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Phone</label>
+                  <input
+                    type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+1 (555) 000-0000"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   />
                 </div>
 
                 {/* Description */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Description / Bio
                   </label>
-                  <Textarea
+                  <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     placeholder="Write a brief bio or description about this team member"
                     rows={4}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring resize-none"
                   />
                 </div>
 
-                {/* Submit Button */}
-                <div className="flex gap-3 justify-end pt-4">
-                  <Button
+                {/* Buttons */}
+                <div className="flex gap-3 justify-end pt-6 border-t">
+                  <button
                     type="button"
-                    variant="outline"
                     onClick={() => {
                       setIsDialogOpen(false);
                       resetForm();
                     }}
+                    className="px-6 py-2 rounded-lg font-bold text-gray-700 bg-gray-200 hover:bg-gray-300 transition"
                   >
                     Cancel
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     type="submit"
-                    disabled={loading || !formData.name || !formData.role}
-                    className="bg-blue-600 hover:bg-blue-700"
+                    disabled={loading}
+                    className="px-6 py-2 rounded-lg font-bold text-white bg-black hover:bg-gray-900 transition disabled:opacity-50 flex items-center gap-2"
                   >
                     {loading ? (
                       <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin" />
                         Saving...
                       </>
-                    ) : editingId ? (
-                      "Update Member"
                     ) : (
-                      "Add Member"
+                      "Save"
                     )}
-                  </Button>
+                  </button>
                 </div>
               </form>
             </DialogContent>
           </Dialog>
         </div>
 
-        {/* Team Members by Category */}
-        <div className="space-y-8">
-          {/* Teachers */}
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Teachers ({groupedMembers.teacher.length})</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {groupedMembers.teacher.length > 0 ? (
-                groupedMembers.teacher.map((member) => (
-                  <TeamMemberCard
-                    key={member.id}
-                    member={member}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                  />
-                ))
-              ) : (
-                <p className="text-gray-500 col-span-full">No teachers added yet</p>
-              )}
-            </div>
-          </div>
-
-          {/* Managers */}
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Managers ({groupedMembers.manager.length})</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {groupedMembers.manager.length > 0 ? (
-                groupedMembers.manager.map((member) => (
-                  <TeamMemberCard
-                    key={member.id}
-                    member={member}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                  />
-                ))
-              ) : (
-                <p className="text-gray-500 col-span-full">No managers added yet</p>
-              )}
-            </div>
-          </div>
-
-          {/* Coordinators */}
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Coordinators ({groupedMembers.coordinator.length})</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {groupedMembers.coordinator.length > 0 ? (
-                groupedMembers.coordinator.map((member) => (
-                  <TeamMemberCard
-                    key={member.id}
-                    member={member}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                  />
-                ))
-              ) : (
-                <p className="text-gray-500 col-span-full">No coordinators added yet</p>
-              )}
-            </div>
-          </div>
+        {/* Team Members Grid */}
+        <div className="space-y-12">
+          {Object.entries(groupedMembers).map(([category, members]: [string, any]) => (
+            members.length > 0 && (
+              <div key={category}>
+                <h2 className="text-3xl font-bold mb-6 capitalize">
+                  {category}s <span className="text-gray-500 text-lg">({members.length})</span>
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {members.map((member: any) => (
+                    <div
+                      key={member.id}
+                      className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition group"
+                    >
+                      {member.photoUrl && (
+                        <div className="relative overflow-hidden bg-gray-200 aspect-square">
+                          <img
+                            src={member.photoUrl}
+                            alt={member.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      )}
+                      <div className="p-6">
+                        <h3 className="text-lg font-bold mb-1">{member.name}</h3>
+                        <p className="text-gray-600 font-semibold mb-3">{member.role}</p>
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-700 rounded">
+                            {member.category}
+                          </span>
+                          <span
+                            className={`text-xs font-semibold px-2 py-1 rounded ${
+                              member.status === "active"
+                                ? "bg-green-100 text-green-700"
+                                : member.status === "promoted"
+                                ? "bg-blue-100 text-blue-700"
+                                : member.status === "left"
+                                ? "bg-red-100 text-red-700"
+                                : "bg-gray-100 text-gray-700"
+                            }`}
+                          >
+                            {member.status}
+                          </span>
+                        </div>
+                        {member.description && (
+                          <p className="text-sm text-gray-600 mb-4 line-clamp-2">{member.description}</p>
+                        )}
+                        <div className="flex gap-2 pt-4 border-t">
+                          <button
+                            onClick={() => handleEdit(member)}
+                            className="flex-1 bg-black hover:bg-gray-900 text-white py-2 rounded-lg font-bold flex items-center justify-center gap-2 transition"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDelete(member.id)}
+                            className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-bold flex items-center justify-center gap-2 transition"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          ))}
         </div>
       </main>
 
       <Footer />
     </div>
-  );
-}
-
-// Team Member Card Component
-function TeamMemberCard({
-  member,
-  onEdit,
-  onDelete,
-}: {
-  member: any;
-  onEdit: (member: any) => void;
-  onDelete: (id: number) => void;
-}) {
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "active":
-        return "bg-green-100 text-green-800";
-      case "inactive":
-        return "bg-gray-100 text-gray-800";
-      case "promoted":
-        return "bg-blue-100 text-blue-800";
-      case "left":
-        return "bg-red-100 text-red-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
-
-  return (
-    <Card className="overflow-hidden hover:shadow-lg transition">
-      {member.photoUrl && (
-        <img
-          src={member.photoUrl}
-          alt={member.name}
-          className="w-full h-48 object-cover"
-        />
-      )}
-      <div className="p-4">
-        <h3 className="font-bold text-lg text-gray-900">{member.name}</h3>
-        <p className="text-sm text-gray-600 mb-2">{member.role}</p>
-
-        {member.description && (
-          <p className="text-sm text-gray-700 mb-3 line-clamp-2">{member.description}</p>
-        )}
-
-        <div className="flex items-center gap-2 mb-3">
-          <span className={`text-xs font-semibold px-2 py-1 rounded ${getStatusColor(member.status)}`}>
-            {member.status}
-          </span>
-        </div>
-
-        {member.email && (
-          <p className="text-xs text-gray-500 mb-1">📧 {member.email}</p>
-        )}
-        {member.phone && (
-          <p className="text-xs text-gray-500 mb-3">📱 {member.phone}</p>
-        )}
-
-        <div className="flex gap-2 pt-3 border-t">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => onEdit(member)}
-            className="flex-1"
-          >
-            <Edit2 className="w-4 h-4 mr-1" />
-            Edit
-          </Button>
-          <Button
-            size="sm"
-            variant="destructive"
-            onClick={() => onDelete(member.id)}
-            className="flex-1"
-          >
-            <Trash2 className="w-4 h-4 mr-1" />
-            Delete
-          </Button>
-        </div>
-      </div>
-    </Card>
   );
 }

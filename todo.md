@@ -431,7 +431,12 @@
 - [x] Redesign file upload boxes with modern style
 - [x] Add upload summary display
 - [x] Update form inputs with focus rings
-- [ ] Update Admin pages with consistent design
+- [x] Update Admin pages with consistent design
+- [x] Add modern styling to AdminTeamManagement page
+- [x] Add status badge color coding (active, promoted, left)
+- [x] Add hover effects to team member cards
+- [x] Create scroll animation utility hook
+- [x] Add slide-up and scale-in animations to CSS
+- [x] All 210 tests passing
 - [ ] Add scroll-triggered animations to sections
 - [ ] Add smooth transitions between pages
-- [ ] Test all pages and animations
