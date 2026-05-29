@@ -425,7 +425,13 @@
 - [ ] Update About page with modern design
 - [ ] Update Contact page with modern design
 - [ ] Add scroll-triggered animations to sections
-- [ ] Update Stories page with modern layout
+- [x] Update Stories page with modern layout
+- [x] Add modern form styling with black/white theme
+- [x] Add fade-in animations to Stories page
+- [x] Redesign file upload boxes with modern style
+- [x] Add upload summary display
+- [x] Update form inputs with focus rings
 - [ ] Update Admin pages with consistent design
+- [ ] Add scroll-triggered animations to sections
 - [ ] Add smooth transitions between pages
 - [ ] Test all pages and animations

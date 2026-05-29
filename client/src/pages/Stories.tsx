@@ -254,7 +254,6 @@ export default function Stories() {
   const renderFileUploadBox = (
     fileType: "image" | "video" | "audio",
     inputRef: React.RefObject<HTMLInputElement | null>,
-    icon: string,
     label: string,
     formats: string
   ) => {
@@ -262,12 +261,12 @@ export default function Stories() {
     const isActive = dragActive[fileType] || false;
 
     return (
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          {icon} {label}
+      <div className="mb-6">
+        <label className="block text-sm font-semibold text-gray-700 mb-3">
+          {label}
         </label>
         {file ? (
-          <div className="bg-green-50 border-2 border-green-500 rounded-lg p-4">
+          <div className="bg-green-50 border-2 border-green-400 rounded-lg p-4 animate-fade-in">
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
@@ -299,10 +298,10 @@ export default function Stories() {
             onDragLeave={(e) => handleDrag(e, fileType, false)}
             onDragOver={(e) => handleDrag(e, fileType, true)}
             onDrop={(e) => handleDrop(e, fileType)}
-            className={`w-full px-4 py-6 border-2 border-dashed rounded-lg text-center transition cursor-pointer ${
+            className={`w-full px-6 py-8 border-2 border-dashed rounded-lg text-center transition cursor-pointer ${
               isActive
-                ? "border-orange-500 bg-orange-50"
-                : "border-gray-300 hover:border-orange-500 hover:bg-orange-50"
+                ? "border-black bg-gray-100"
+                : "border-gray-300 hover:border-black hover:bg-gray-50"
             }`}
           >
             <button
@@ -310,8 +309,8 @@ export default function Stories() {
               onClick={() => inputRef.current?.click()}
               className="w-full"
             >
-              <FileUp size={28} className="mx-auto mb-2" style={{ color: "#e07f10" }} />
-              <p className="text-sm font-medium text-gray-700 mb-1">
+              <FileUp size={32} className="mx-auto mb-3 text-gray-600" />
+              <p className="text-sm font-semibold text-gray-700 mb-1">
                 {isActive ? "Drop your file here" : "Click to upload or drag and drop"}
               </p>
               <p className="text-xs text-gray-500">{formats}</p>
@@ -338,80 +337,81 @@ export default function Stories() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 py-12 px-6">
+      <div className="min-h-screen bg-white py-16 px-6">
         <div className="max-w-2xl mx-auto">
           {step === "auth" ? (
             // Authentication Step
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <div className="flex items-center justify-center mb-6">
-                <Lock size={40} style={{ color: "#e07f10" }} />
-              </div>
-              <h1 className="text-3xl font-bold text-center mb-2" style={{ color: "#e07f10" }}>
-                Share Your Story
-              </h1>
-              <p className="text-center text-gray-600 mb-8">
-                Enter your admin key to submit a story to our community
-              </p>
-
-              <form onSubmit={handleKeySubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Admin Key
-                  </label>
-                  <input
-                    type="password"
-                    value={adminKey}
-                    onChange={(e) => {
-                      setAdminKey(e.target.value);
-                      setKeyError("");
-                    }}
-                    placeholder="Enter your admin key"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  />
-                  {keyError && (
-                    <p className="text-red-500 text-sm mt-2 flex items-center gap-2">
-                      <AlertCircle size={16} />
-                      {keyError}
-                    </p>
-                  )}
+            <div className="animate-fade-in">
+              <div className="text-center mb-12">
+                <div className="flex justify-center mb-6">
+                  <div className="bg-black rounded-full p-4">
+                    <Lock size={40} className="text-white" />
+                  </div>
                 </div>
+                <h1 className="text-5xl font-bold mb-3">Share Your Story</h1>
+                <p className="text-xl text-gray-600">
+                  Enter your admin key to submit a story to our community
+                </p>
+              </div>
 
-                <button
-                  type="submit"
-                  className="w-full py-2 px-4 rounded-lg font-semibold text-white transition"
-                  style={{ backgroundColor: "#e07f10" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#d66d0a")}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#e07f10")}
-                >
-                  Unlock Story Submission
-                </button>
-              </form>
+              <div className="bg-gray-50 rounded-lg p-8 border border-gray-200">
+                <form onSubmit={handleKeySubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Admin Key
+                    </label>
+                    <input
+                      type="password"
+                      value={adminKey}
+                      onChange={(e) => {
+                        setAdminKey(e.target.value);
+                        setKeyError("");
+                      }}
+                      placeholder="Enter your admin key"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
+                    />
+                    {keyError && (
+                      <p className="text-red-600 text-sm mt-2 flex items-center gap-2">
+                        <AlertCircle size={16} />
+                        {keyError}
+                      </p>
+                    )}
+                  </div>
 
-              <p className="text-center text-sm text-gray-500 mt-6">
-                Don't have an admin key? Contact the administrator to get access.
-              </p>
+                  <button
+                    type="submit"
+                    className="w-full py-3 px-4 rounded-lg font-bold text-white bg-black hover:bg-gray-900 transition-colors"
+                  >
+                    Unlock Story Submission
+                  </button>
+                </form>
+
+                <p className="text-center text-sm text-gray-600 mt-6">
+                  Don't have an admin key? Contact the administrator to get access.
+                </p>
+              </div>
             </div>
           ) : (
             // Story Submission Form
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h1 className="text-3xl font-bold mb-2" style={{ color: "#e07f10" }}>
-                Submit Your Story
-              </h1>
-              <p className="text-gray-600 mb-8">
-                Share your experience and inspire others in our community
-              </p>
+            <div className="animate-fade-in">
+              <div className="mb-12">
+                <h1 className="text-5xl font-bold mb-3">Submit Your Story</h1>
+                <p className="text-xl text-gray-600">
+                  Share your experience and inspire others in our community
+                </p>
+              </div>
 
-              <form onSubmit={handleFormSubmit} className="space-y-6">
+              <form onSubmit={handleFormSubmit} className="space-y-8">
                 {/* Category Selection */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Category <span className="text-red-500">*</span>
                   </label>
                   <select
                     name="category"
                     value={formData.category}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   >
                     <option value="">Select a category</option>
                     {CATEGORIES.map((cat) => (
@@ -424,7 +424,7 @@ export default function Stories() {
 
                 {/* Author Name */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Your Name <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -433,13 +433,13 @@ export default function Stories() {
                     value={formData.authorName}
                     onChange={handleInputChange}
                     placeholder="Enter your full name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   />
                 </div>
 
                 {/* School */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
                     School Name <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -448,13 +448,13 @@ export default function Stories() {
                     value={formData.school}
                     onChange={handleInputChange}
                     placeholder="Enter your school name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   />
                 </div>
 
                 {/* Title */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Story Title <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -463,13 +463,13 @@ export default function Stories() {
                     value={formData.title}
                     onChange={handleInputChange}
                     placeholder="Give your story a title"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   />
                 </div>
 
                 {/* Content */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Your Story <span className="text-red-500">*</span>
                   </label>
                   <textarea
@@ -478,92 +478,81 @@ export default function Stories() {
                     onChange={handleInputChange}
                     placeholder="Tell your story... (minimum 10 characters)"
                     rows={6}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring resize-none"
                   />
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-gray-500 mt-2">
                     {formData.content.length} characters
                   </p>
                 </div>
 
                 {/* File Uploads */}
-                <div className="border-t pt-6">
-                  <h3 className="font-semibold text-lg text-gray-700 mb-4 flex items-center gap-2">
-                    <Upload size={20} style={{ color: "#e07f10" }} />
+                <div className="border-t pt-8">
+                  <h3 className="font-bold text-lg text-gray-900 mb-6 flex items-center gap-2">
+                    <Upload size={24} />
                     Upload Media (Optional)
                   </h3>
-                  <p className="text-sm text-gray-600 mb-6">
-                    You can upload images, videos, and audio files to enhance your story. All files are optional.
-                  </p>
-
-                  {/* Image Upload */}
-                  {renderFileUploadBox(
-                    "image",
-                    imageInputRef,
-                    "📷",
-                    "Image",
-                    "JPG, PNG, GIF, WebP (max 50MB)"
-                  )}
-
-                  {/* Video Upload */}
-                  {renderFileUploadBox(
-                    "video",
-                    videoInputRef,
-                    "🎬",
-                    "Video",
-                    "MP4, WebM, MOV (max 50MB)"
-                  )}
-
-                  {/* Audio Upload */}
-                  {renderFileUploadBox(
-                    "audio",
-                    audioInputRef,
-                    "🎙️",
-                    "Audio",
-                    "MP3, WAV, OGG, M4A (max 50MB)"
-                  )}
+                  
+                  <div className="grid md:grid-cols-3 gap-6 mb-8">
+                    <div>
+                      {renderFileUploadBox(
+                        "image",
+                        imageInputRef,
+                        "📷 Image",
+                        "JPG, PNG, GIF, WebP"
+                      )}
+                    </div>
+                    <div>
+                      {renderFileUploadBox(
+                        "video",
+                        videoInputRef,
+                        "🎬 Video",
+                        "MP4, WebM, MOV"
+                      )}
+                    </div>
+                    <div>
+                      {renderFileUploadBox(
+                        "audio",
+                        audioInputRef,
+                        "🎵 Audio",
+                        "MP3, WAV, OGG"
+                      )}
+                    </div>
+                  </div>
 
                   {/* Upload Summary */}
-                  {(uploadedFiles.image || uploadedFiles.video || uploadedFiles.audio) && (
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
-                      <p className="text-sm font-medium text-blue-900 mb-2">
-                        ✓ Media files ready to upload
+                  {Object.keys(uploadedFiles).length > 0 && (
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+                      <p className="text-sm font-semibold text-blue-900">
+                        ✓ {Object.keys(uploadedFiles).length} file{Object.keys(uploadedFiles).length !== 1 ? 's' : ''} ready to upload
                       </p>
-                      <ul className="text-sm text-blue-800 space-y-1">
-                        {uploadedFiles.image && (
-                          <li>• Image: {uploadedFiles.image.file.name}</li>
-                        )}
-                        {uploadedFiles.video && (
-                          <li>• Video: {uploadedFiles.video.file.name}</li>
-                        )}
-                        {uploadedFiles.audio && (
-                          <li>• Audio: {uploadedFiles.audio.file.name}</li>
-                        )}
-                      </ul>
                     </div>
                   )}
                 </div>
 
-                {/* Buttons */}
-                <div className="flex gap-4 pt-6 border-t">
+                {/* Submit Button */}
+                <div className="flex gap-4 pt-4">
                   <button
                     type="button"
                     onClick={() => {
                       setStep("auth");
-                      setAdminKey("");
+                      setFormData({
+                        category: "",
+                        authorName: "",
+                        school: "",
+                        title: "",
+                        content: "",
+                      });
+                      setUploadedFiles({});
                     }}
-                    className="flex-1 py-2 px-4 rounded-lg font-semibold border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
+                    className="flex-1 py-3 px-4 rounded-lg font-bold text-gray-700 bg-gray-200 hover:bg-gray-300 transition-colors"
                   >
                     Back
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 py-2 px-4 rounded-lg font-semibold text-white transition flex items-center justify-center gap-2"
-                    style={{ backgroundColor: "#e07f10", opacity: isSubmitting ? 0.7 : 1 }}
-                    onMouseEnter={(e) => !isSubmitting && (e.currentTarget.style.backgroundColor = "#d66d0a")}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#e07f10")}
+                    className="flex-1 py-3 px-4 rounded-lg font-bold text-white bg-black hover:bg-gray-900 transition-colors disabled:opacity-50"
                   >
-                    <Upload size={20} />
                     {isSubmitting ? "Submitting..." : "Submit Story"}
                   </button>
                 </div>
