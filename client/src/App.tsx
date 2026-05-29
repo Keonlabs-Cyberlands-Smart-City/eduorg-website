@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
+import { useState, useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollProgressBar from "./components/ScrollProgressBar";
@@ -18,24 +19,45 @@ import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import AdminTeamManagement from "./pages/AdminTeamManagement";
 
+// Page transition wrapper
+function PageTransitionWrapper({ children }: { children: React.ReactNode }) {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, [children]);
+
+  return (
+    <div
+      className={`transition-opacity duration-500 ease-in-out ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      {children}
+    </div>
+  );
+}
+
 function Router() {
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/bootcamp"} component={Bootcamp} />
-      <Route path={"/sports"} component={Sports} />
-      <Route path={"/clubs"} component={Clubs} />
-      <Route path={"/library"} component={Library} />
-      <Route path={"/dayin"} component={DayIn} />
-      <Route path={"/outreach"} component={Outreach} />
-      <Route path={"/stories"} component={Stories} />
-      <Route path={"/stories-gallery"} component={StoriesGalleryPage} />
-      <Route path={"/admin-login"} component={AdminLogin} />
-      <Route path={"/admin"} component={Admin} />
-      <Route path={"/admin/team"} component={AdminTeamManagement} />
-      <Route path={"/404"} component={NotFound} />
-      <Route component={NotFound} />
-    </Switch>
+    <PageTransitionWrapper>
+      <Switch>
+        <Route path={"/"} component={Home} />
+        <Route path={"/bootcamp"} component={Bootcamp} />
+        <Route path={"/sports"} component={Sports} />
+        <Route path={"/clubs"} component={Clubs} />
+        <Route path={"/library"} component={Library} />
+        <Route path={"/dayin"} component={DayIn} />
+        <Route path={"/outreach"} component={Outreach} />
+        <Route path={"/stories"} component={Stories} />
+        <Route path={"/stories-gallery"} component={StoriesGalleryPage} />
+        <Route path={"/admin-login"} component={AdminLogin} />
+        <Route path={"/admin"} component={Admin} />
+        <Route path={"/admin/team"} component={AdminTeamManagement} />
+        <Route path={"/404"} component={NotFound} />
+        <Route component={NotFound} />
+      </Switch>
+    </PageTransitionWrapper>
   );
 }
 

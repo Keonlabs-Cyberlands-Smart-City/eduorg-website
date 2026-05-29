@@ -3,7 +3,8 @@ import { collection, query, where, orderBy, onSnapshot, doc, getDoc } from "fire
 import { db } from "@/lib/firebase";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ScrollReveal from "@/components/ScrollReveal";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { ArrowRight } from "lucide-react";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/baraka-logo-draft_1_e8f3dd40.jpg";
 
@@ -15,6 +16,9 @@ export default function Sports() {
     schools: "15+",
     tournaments: "20+",
   });
+
+  const statsRef = useScrollAnimation();
+  const updatesRef = useScrollAnimation();
 
   useEffect(() => {
     loadUpdates();
@@ -53,110 +57,91 @@ export default function Sports() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white font-sans">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
       {/* HERO SECTION */}
       <section
-        className="h-[500px] bg-cover bg-center flex items-center justify-center text-white relative overflow-hidden"
+        className="h-[600px] bg-cover bg-center flex items-center justify-center text-white relative overflow-hidden"
         style={{
           backgroundImage:
             "url('https://d2xsxph8kpxj0f.cloudfront.net/310519663455556448/epjCjfnCCf8LFtGtGELo3e/sports images_52357345.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 bg-black/40 backdrop-blur-sm p-12 rounded-2xl text-center animate-fade-in-up max-w-2xl">
-          <h2 className="text-5xl font-bold mb-4" style={{ color: '#e57d06' }}>
-            Sports Program
-          </h2>
-          <p className="text-xl text-gray-100">Games and physical activities for healthy development</p>
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="relative z-10 text-center animate-fade-in max-w-3xl px-6">
+          <h1 className="text-6xl font-bold mb-4">Sports Program</h1>
+          <p className="text-2xl text-gray-200">Games and physical activities for healthy development</p>
         </div>
       </section>
 
       {/* STATISTICS SECTION */}
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4" style={{ color: '#95ba12' }}>
-            Our Impact
-          </h2>
-          <p className="text-center text-gray-600 mb-12 text-lg">Building champions through sports and physical excellence</p>
-          
-          <div className="grid md:grid-cols-4 gap-6">
+      <section ref={statsRef.ref} className={`py-24 bg-white transition-opacity duration-1000 ${statsRef.isVisible ? "opacity-100" : "opacity-0"}`}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-4">Our Impact</h2>
+            <p className="text-xl text-gray-600">Building champions through sports and physical excellence</p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8">
             {[
-              { label: "Sports Events / Year", value: stats.events, color: "#e57d06" },
-              { label: "Athletes Engaged", value: stats.athletes, color: "#95ba12" },
-              { label: "Schools Participated", value: stats.schools, color: "#e57d06" },
-              { label: "Tournaments Hosted", value: stats.tournaments, color: "#95ba12" },
+              { label: "Sports Events / Year", value: stats.events },
+              { label: "Athletes Engaged", value: stats.athletes },
+              { label: "Schools Participated", value: stats.schools },
+              { label: "Tournaments Hosted", value: stats.tournaments },
             ].map((stat, idx) => (
-              <ScrollReveal
+              <div
                 key={idx}
-                animation="fade-up"
-                delay={idx * 100}
-                duration={600}
+                className={`bg-white border border-gray-200 p-8 rounded-lg text-center hover:shadow-lg transition-all duration-500 animate-scale-in`}
+                style={{ animationDelay: `${idx * 100}ms` }}
               >
-                <div
-                  className="bg-white p-8 rounded-2xl shadow-lg hover-lift border-t-4 transition-all duration-300"
-                  style={{ borderColor: stat.color }}
-                >
-                  <h3 className="text-5xl font-bold mb-3" style={{ color: stat.color }}>
-                    {stat.value}
-                  </h3>
-                  <p className="text-gray-700 font-medium">{stat.label}</p>
-                </div>
-              </ScrollReveal>
+                <h3 className="text-5xl font-bold mb-3 text-black">{stat.value}</h3>
+                <p className="text-gray-600 font-semibold">{stat.label}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* LATEST UPDATES SECTION */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="mb-12 animate-fade-in-up">
-            <h2 className="text-4xl font-bold mb-3" style={{ color: '#95ba12' }}>
-              Latest Updates
-            </h2>
-            <div className="h-1 w-24" style={{ backgroundColor: '#e57d06' }}></div>
+      <section ref={updatesRef.ref} className={`py-24 bg-gray-50 transition-opacity duration-1000 ${updatesRef.isVisible ? "opacity-100" : "opacity-0"}`}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="mb-16">
+            <h2 className="text-5xl font-bold mb-4">Latest Updates</h2>
+            <div className="h-1 w-24 bg-black"></div>
           </div>
 
           {updates.length === 0 ? (
-            <div className="text-center py-12">
+            <div className="text-center py-16">
               <p className="text-gray-500 text-lg">No updates yet. Check back soon!</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 gap-8">
               {updates.map((update, idx) => (
-                <ScrollReveal
+                <div
                   key={update.id}
-                  animation="fade-up"
-                  delay={idx * 150}
-                  duration={600}
+                  className={`bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-500 group animate-slide-up`}
+                  style={{ animationDelay: `${idx * 150}ms` }}
                 >
-                  <div
-                    className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 update-card-hover"
-                  >
-                    {update.image && (
+                  {update.image && (
                     <div className="h-48 overflow-hidden bg-gray-200">
                       <img
                         src={update.image}
                         alt={update.title}
-                        className="w-full h-full object-cover hover-scale-lg transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                   )}
                   <div className="p-6">
-                    <h3 className="font-bold text-xl mb-3" style={{ color: '#e57d06' }}>
-                      {update.title}
-                    </h3>
-                    <p className="text-gray-700 text-sm mb-4 line-clamp-3">{update.content}</p>
-                    <p className="text-xs text-gray-500 mb-3">📅 {update.date}</p>
+                    <h3 className="font-bold text-xl mb-3 text-black">{update.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">{update.content}</p>
+                    <p className="text-xs text-gray-500 mb-4">📅 {update.date}</p>
                     {update.tags && update.tags.length > 0 && (
                       <div className="flex gap-2 flex-wrap">
                         {update.tags.map((tag: string, idx: number) => (
                           <span
                             key={idx}
-                            className="text-xs px-3 py-1 rounded-full font-medium transition-all duration-300"
-                            style={{ backgroundColor: '#e5f7e5', color: '#95ba12' }}
+                            className="text-xs px-3 py-1 rounded-full font-medium bg-gray-100 text-gray-700"
                           >
                             {tag}
                           </span>
@@ -164,8 +149,7 @@ export default function Sports() {
                       </div>
                     )}
                   </div>
-                  </div>
-                </ScrollReveal>
+                </div>
               ))}
             </div>
           )}
@@ -173,15 +157,13 @@ export default function Sports() {
       </section>
 
       {/* CTA SECTION */}
-      <section className="py-16 text-white" style={{ backgroundColor: '#e57d06' }}>
-        <div className="max-w-4xl mx-auto px-4 text-center animate-fade-in-up">
-          <h3 className="text-3xl font-bold mb-4">Join Our Sports Community!</h3>
-          <p className="text-lg mb-8 text-gray-100">Develop skills, build teamwork, and achieve athletic excellence</p>
-          <button
-            className="px-8 py-3 bg-white rounded-lg font-bold transition-all duration-300 hover-scale"
-            style={{ color: '#e57d06' }}
-          >
+      <section className="py-24 bg-black text-white">
+        <div className="max-w-4xl mx-auto px-6 text-center animate-fade-in">
+          <h3 className="text-5xl font-bold mb-6">Join Our Sports Community!</h3>
+          <p className="text-xl text-gray-300 mb-8">Develop skills, build teamwork, and achieve athletic excellence</p>
+          <button className="px-8 py-4 bg-white text-black rounded-lg font-bold hover:bg-gray-100 transition-colors flex items-center gap-2 mx-auto group">
             Get Involved
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
       </section>
