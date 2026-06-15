@@ -14,10 +14,10 @@
   ],
   "git_remote": {
     "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663455556448/epjCjfnCCf8LFtGtGELo3e",
-    "access_key_id": "ASIAZV3A2ECZIWXPT42F",
-    "secret_access_key": "jIEWdE5dsjT7EdjsaInHhP/r54qgWFYrou+ZIRir",
-    "session_token": "IQoJb3JpZ2luX2VjEMH//////////wEaCXVzLWVhc3QtMSJHMEUCIQCjfkWcIvS+ATprATkxcS6VnIqqoqULuHBLdt17oq7P0QIgKQqaHNe2GanF3tMyCDxcbsxLpQz9xZQ2lSejttm1PkMq/gMIiv//////////ARAEGgw2NjUzODYwOTg4NjYiDHA3osPZV9rc5iNf7SrSA4YHN/YMAwLWsrUS2eMajYsQD/W4wgvImqvNlNJBWn7H/Ch7Cg1kjZABhivtLedhKAPwMZ4+TtftnBh2WKB6M94+6ulRLmRvGNdTC9S3VMhwh7WEOWPEuwqxLKCcymdsy+F4I9gzbd6oFoIvkUjy8b82An/ocBS8ejlONejG5NHUoJMfIgrwD5Tmil7bvOI8ueYzXuy8LYu36rAqWkY98U4VfZih3V4RIk68gMJYcBquBszaauk1kXNvPtKJUpyfZOgN9OXcT4KYBx8pyrRsv6ljKrwnwpPkdJVJtOiHX/EPfv9tuMNaa7otHw413c/Uv9DjUFU69Zhf1pl/uUoYe4oQLz6pHcgnr3ZLHQcri6+s5Ks6dB2wupSjlhO6WCuSA/UU0/wmOQOE4gQ5y67AFRy7pIzWjMX3uFL/ABNqwlvwL0Zg/QLBcGG4j+eYeVcGN9KpGQmpE4iAc1ajMVgKYA3j8WSMUiETx5CInOZiYPtJvkY+8Wt2v5UF5r7l2RtjznrZBzd/UPPU/T4P456/i01g1XoOlNbDZPXI6mHAhsCDoBlSPf36bS3EAVsh+blPJGkOUeniXLAtAPqRXms4cl390NOo+J4FSXAlfRJVMZVbrMQwlteg0AY6nQGviRP7YwDXu85iZ1cVjwZWrR7mkjsG6PecdfMZf3dxnafvOCnRqZRVonJ2PDAm2KwulWXtP1G24tCkNrBeZ5fcG5AmpsLUm3NDqGKxituWuAdhGOGEhAFruBQkcPln3p5sneYAyg+AyZSRZQIrwtbwZ6SHLwWAoNJ+tyWHZenKjyyqDVLHEBz+dAsjTbi8aOVKY1Nvjz7C0YRBVGNn",
-    "expiration": "2026-05-16T20:32:22.000Z"
+    "access_key_id": "ASIAZV3A2ECZLFZQGNT4",
+    "secret_access_key": "VTakmgcH0j35jXo8T0waP2YMY/+f/UTFH+Kv6x/r",
+    "session_token": "IQoJb3JpZ2luX2VjEJv//////////wEaCXVzLWVhc3QtMSJIMEYCIQDN4b6sgOusJVuLxeDEqUbzY/lgKJwpkYowgF5vJTwjEAIhAP+uoXpZRbdetLtA5LeMI1a9knFANYEvI2PR5VMnDC6bKvUDCGMQBBoMNjY1Mzg2MDk4ODY2IgzFfLIESylmZfw64hUq0gOfRXJ40YqZEcUkP5lMPDzQdKWtGm5Y/3alHu3YnyzD+SUzdqDAxYhuk+zbaNh+RWoAWBNGdIMyFl93z1cSBjfwvHM/6MGzYan7gruRNSVimoQMQHNDcJAwZxQOa9bMwVvBHeMjwqrghx0Mih194xUivDY2gxSqoIzIM5MF+R4iv3YTNTdzoloJUKLbEi2HasqyVdcbvtZVWFT4fUgBs0NUdNBkpVnIonGQSzd2EM/+eXzyLDwoOhHtr40G3bs6t5BAqCDdNAQckFGSnVwcg4kT9rE+XdYrNdOUPiAYAcBb/YtfQPFOMQJMv0Y2OVA1GzWv7k6qmi5FoVXhwgd0X9Xi/rO2uLWcJGcExDpJ3EUQEm174d3zgx0tQADlgjSaACIh9LYwu0xL3YQcc4xlVIrw9IvTWl1hAnTI+yZbclVdr2YOC6UDdVO0vomtq4IW+utIvRTAYibhWMTI1sNMuqtJwLJUD0eab6PHWFUjWJTHuaoRp41DctSpKYIGfSk+SMXOz59yhxbkhKJ+89Qbm6VSEVLWWZrr7zdwqbe2CSPWUSrolGLQK27DOs49TquKIzGBm5nee779L6yNbdcrFrdtmN6VUtQmAveecYH6T4YKBdoWMMCAwdEGOpwBJpO8t3DPA+G7nCv30TvMYz2yLJQBDAHvEwKyXnZzr5QCNfuL401VX4sEw1fcyYkcV0tEMKrbelxYZcZmFR9vGa/K8Sdpt8E+DQoDBVbK8Angj9mbn8hkeMpSPBYcPUvUCEWZf6e02/lo6nBIuchq0Pby8hSwhPyZSxpgnNWsinNLtBveKMrZTQccrRqnFnLCTMeKBvKCjidHq0Nz",
+    "expiration": "2026-06-16T06:11:12.000Z"
   },
   "name": "eduorg-website",
   "path": "/home/ubuntu/eduorg-website",

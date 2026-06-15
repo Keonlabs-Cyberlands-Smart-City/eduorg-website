@@ -3,7 +3,7 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Upload, Lock, X, FileUp, CheckCircle, AlertCircle } from "lucide-react";
+import { Upload, Lock, X, FileUp, CheckCircle, AlertCircle, Mail } from "lucide-react";
 
 const CATEGORIES = [
   { value: "teacher", label: "Teacher" },
@@ -23,9 +23,14 @@ interface FileUpload {
 }
 
 export default function Stories() {
-  const [step, setStep] = useState<"auth" | "form">("auth");
+  const [step, setStep] = useState<"auth" | "form" | "request">("auth");
   const [adminKey, setAdminKey] = useState("");
   const [keyError, setKeyError] = useState("");
+  
+  const [requestEmail, setRequestEmail] = useState("");
+  const [requestName, setRequestName] = useState("");
+  const [requestMessage, setRequestMessage] = useState("");
+  const [isRequestingKey, setIsRequestingKey] = useState(false);
   
   const [formData, setFormData] = useState({
     category: "",
@@ -68,6 +73,44 @@ export default function Stories() {
     } else {
       setKeyError("Invalid admin key. Please try again.");
       toast.error("Invalid admin key");
+    }
+  };
+
+  const handleRequestKey = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!requestEmail || !requestName) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    setIsRequestingKey(true);
+    try {
+      // Send email request to admin
+      const response = await fetch("/api/request-story-key", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: requestEmail,
+          name: requestName,
+          message: requestMessage,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Request sent! The admin will respond with your access key shortly.");
+        setRequestEmail("");
+        setRequestName("");
+        setRequestMessage("");
+        setStep("auth");
+      } else {
+        toast.error("Failed to send request. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending request:", error);
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setIsRequestingKey(false);
     }
   };
 
@@ -386,9 +429,94 @@ export default function Stories() {
                   </button>
                 </form>
 
-                <p className="text-center text-sm text-gray-600 mt-6">
-                  Don't have an admin key? Contact the administrator to get access.
+                <div className="mt-8 pt-8 border-t border-gray-300 space-y-3">
+                  <p className="text-center text-sm text-gray-600">
+                    Don't have an admin key?
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setStep("request")}
+                    className="w-full py-3 px-4 rounded-lg font-semibold text-black bg-gray-200 hover:bg-gray-300 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Mail size={18} />
+                    Request Access Key
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : step === "request" ? (
+            // Request Key Step
+            <div className="animate-fade-in">
+              <div className="text-center mb-12">
+                <div className="flex justify-center mb-6">
+                  <div className="bg-orange-500 rounded-full p-4">
+                    <Mail size={40} className="text-white" />
+                  </div>
+                </div>
+                <h1 className="text-5xl font-bold mb-3">Request Access Key</h1>
+                <p className="text-xl text-gray-600">
+                  Don't have an access key? Submit your details and we'll send you one.
                 </p>
+              </div>
+
+              <div className="bg-gray-50 rounded-lg p-8 border border-gray-200">
+                <form onSubmit={handleRequestKey} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Your Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={requestName}
+                      onChange={(e) => setRequestName(e.target.value)}
+                      placeholder="Enter your full name"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Email Address <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      value={requestEmail}
+                      onChange={(e) => setRequestEmail(e.target.value)}
+                      placeholder="your.email@example.com"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Message (Optional)
+                    </label>
+                    <textarea
+                      value={requestMessage}
+                      onChange={(e) => setRequestMessage(e.target.value)}
+                      placeholder="Tell us why you'd like to share your story..."
+                      rows={4}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring resize-none"
+                    />
+                  </div>
+
+                  <div className="flex gap-3 pt-4">
+                    <button
+                      type="submit"
+                      disabled={isRequestingKey}
+                      className="flex-1 py-3 px-4 rounded-lg font-bold text-white bg-black hover:bg-gray-900 transition-colors disabled:opacity-50"
+                    >
+                      {isRequestingKey ? "Sending..." : "Send Request"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setStep("auth")}
+                      className="flex-1 py-3 px-4 rounded-lg font-semibold text-black bg-gray-200 hover:bg-gray-300 transition-colors"
+                    >
+                      Back
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           ) : (
@@ -440,14 +568,14 @@ export default function Stories() {
                 {/* School */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    School Name <span className="text-red-500">*</span>
+                    School/Organization <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     name="school"
                     value={formData.school}
                     onChange={handleInputChange}
-                    placeholder="Enter your school name"
+                    placeholder="Enter your school or organization name"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   />
                 </div>
@@ -462,7 +590,7 @@ export default function Stories() {
                     name="title"
                     value={formData.title}
                     onChange={handleInputChange}
-                    placeholder="Give your story a title"
+                    placeholder="Give your story a compelling title"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring"
                   />
                 </div>
@@ -476,7 +604,7 @@ export default function Stories() {
                     name="content"
                     value={formData.content}
                     onChange={handleInputChange}
-                    placeholder="Tell your story... (minimum 10 characters)"
+                    placeholder="Share your story here... (minimum 50 characters)"
                     rows={6}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-ring resize-none"
                   />
@@ -486,51 +614,49 @@ export default function Stories() {
                 </div>
 
                 {/* File Uploads */}
-                <div className="border-t pt-8">
-                  <h3 className="font-bold text-lg text-gray-900 mb-6 flex items-center gap-2">
-                    <Upload size={24} />
-                    Upload Media (Optional)
-                  </h3>
-                  
-                  <div className="grid md:grid-cols-3 gap-6 mb-8">
-                    <div>
-                      {renderFileUploadBox(
-                        "image",
-                        imageInputRef,
-                        "📷 Image",
-                        "JPG, PNG, GIF, WebP"
-                      )}
-                    </div>
-                    <div>
-                      {renderFileUploadBox(
-                        "video",
-                        videoInputRef,
-                        "🎬 Video",
-                        "MP4, WebM, MOV"
-                      )}
-                    </div>
-                    <div>
-                      {renderFileUploadBox(
-                        "audio",
-                        audioInputRef,
-                        "🎵 Audio",
-                        "MP3, WAV, OGG"
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Upload Summary */}
-                  {Object.keys(uploadedFiles).length > 0 && (
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
-                      <p className="text-sm font-semibold text-blue-900">
-                        ✓ {Object.keys(uploadedFiles).length} file{Object.keys(uploadedFiles).length !== 1 ? 's' : ''} ready to upload
-                      </p>
-                    </div>
+                <div className="border-t border-gray-200 pt-8">
+                  <h3 className="text-lg font-bold mb-6">Media (Optional)</h3>
+                  {renderFileUploadBox(
+                    "image",
+                    imageInputRef,
+                    "Upload Image",
+                    "JPG, PNG, GIF, WebP (Max 50MB)"
+                  )}
+                  {renderFileUploadBox(
+                    "video",
+                    videoInputRef,
+                    "Upload Video",
+                    "MP4, WebM, MOV (Max 50MB)"
+                  )}
+                  {renderFileUploadBox(
+                    "audio",
+                    audioInputRef,
+                    "Upload Audio",
+                    "MP3, WAV, OGG, M4A (Max 50MB)"
                   )}
                 </div>
 
+                {/* Upload Summary */}
+                {(uploadedFiles.image || uploadedFiles.video || uploadedFiles.audio) && (
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h4 className="font-semibold text-blue-900 mb-2">Uploaded Media</h4>
+                    <ul className="text-sm text-blue-800 space-y-1">
+                      {uploadedFiles.image && <li>✓ Image: {uploadedFiles.image.file.name}</li>}
+                      {uploadedFiles.video && <li>✓ Video: {uploadedFiles.video.file.name}</li>}
+                      {uploadedFiles.audio && <li>✓ Audio: {uploadedFiles.audio.file.name}</li>}
+                    </ul>
+                  </div>
+                )}
+
                 {/* Submit Button */}
-                <div className="flex gap-4 pt-4">
+                <div className="flex gap-3 pt-4">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="flex-1 py-3 px-4 rounded-lg font-bold text-white bg-black hover:bg-gray-900 transition-colors disabled:opacity-50"
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit Story"}
+                  </button>
                   <button
                     type="button"
                     onClick={() => {
@@ -543,17 +669,11 @@ export default function Stories() {
                         content: "",
                       });
                       setUploadedFiles({});
+                      setAdminKey("");
                     }}
-                    className="flex-1 py-3 px-4 rounded-lg font-bold text-gray-700 bg-gray-200 hover:bg-gray-300 transition-colors"
+                    className="flex-1 py-3 px-4 rounded-lg font-semibold text-black bg-gray-200 hover:bg-gray-300 transition-colors"
                   >
                     Back
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex-1 py-3 px-4 rounded-lg font-bold text-white bg-black hover:bg-gray-900 transition-colors disabled:opacity-50"
-                  >
-                    {isSubmitting ? "Submitting..." : "Submit Story"}
                   </button>
                 </div>
               </form>

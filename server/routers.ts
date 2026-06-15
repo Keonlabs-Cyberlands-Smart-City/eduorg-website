@@ -28,8 +28,10 @@ import {
   updateTeamMember,
   deleteTeamMember,
 } from "./db";
+import { storyKeyRequestRouter } from "./routers/storyKeyRequest";
 
 export const appRouter = router({
+  storyKeyRequest: storyKeyRequestRouter,
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
   auth: router({
