@@ -137,7 +137,7 @@ export default function Home() {
                   {slide.subtitle}
                 </p>
                 <Link href="/programs">
-                  <button className="bg-white text-black px-8 py-3 font-bold text-lg hover:bg-gray-100 transition-colors">
+                  <button className="bg-orange-500 text-white px-8 py-3 font-bold text-lg hover:bg-orange-600 transition-colors">
                     EXPLORE NOW
                   </button>
                 </Link>

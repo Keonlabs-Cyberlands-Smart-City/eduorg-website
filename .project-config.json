@@ -7,17 +7,18 @@
   ],
   "dev_command": "pnpm run dev",
   "env_vars": {
-    "DATABASE_URL": "mysql://HkCx7BCLaJJJdWP.0a27b6c8b190:I16xIQqfPk47UkU8Gp4T@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/epjCjfnCCf8LFtGtGELo3e?ssl={\"rejectUnauthorized\":true}"
+    "DATABASE_URL": "mysql://HkCx7BCLaJJJdWP.0a27b6c8b190:I16xIQqfPk47UkU8Gp4T@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/epjCjfnCCf8LFtGtGELo3e?ssl={\"rejectUnauthorized\":true}",
+    "DRIZZLE_DATABASE_URL": "mysql://HkCx7BCLaJJJdWP.0a27b6c8b190:I16xIQqfPk47UkU8Gp4T@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/epjCjfnCCf8LFtGtGELo3e?ssl={\"rejectUnauthorized\":true}"
   },
   "experiments": [
     "no_db_push"
   ],
   "git_remote": {
     "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663455556448/epjCjfnCCf8LFtGtGELo3e",
-    "access_key_id": "ASIAZV3A2ECZLFZQGNT4",
-    "secret_access_key": "VTakmgcH0j35jXo8T0waP2YMY/+f/UTFH+Kv6x/r",
-    "session_token": "IQoJb3JpZ2luX2VjEJv//////////wEaCXVzLWVhc3QtMSJIMEYCIQDN4b6sgOusJVuLxeDEqUbzY/lgKJwpkYowgF5vJTwjEAIhAP+uoXpZRbdetLtA5LeMI1a9knFANYEvI2PR5VMnDC6bKvUDCGMQBBoMNjY1Mzg2MDk4ODY2IgzFfLIESylmZfw64hUq0gOfRXJ40YqZEcUkP5lMPDzQdKWtGm5Y/3alHu3YnyzD+SUzdqDAxYhuk+zbaNh+RWoAWBNGdIMyFl93z1cSBjfwvHM/6MGzYan7gruRNSVimoQMQHNDcJAwZxQOa9bMwVvBHeMjwqrghx0Mih194xUivDY2gxSqoIzIM5MF+R4iv3YTNTdzoloJUKLbEi2HasqyVdcbvtZVWFT4fUgBs0NUdNBkpVnIonGQSzd2EM/+eXzyLDwoOhHtr40G3bs6t5BAqCDdNAQckFGSnVwcg4kT9rE+XdYrNdOUPiAYAcBb/YtfQPFOMQJMv0Y2OVA1GzWv7k6qmi5FoVXhwgd0X9Xi/rO2uLWcJGcExDpJ3EUQEm174d3zgx0tQADlgjSaACIh9LYwu0xL3YQcc4xlVIrw9IvTWl1hAnTI+yZbclVdr2YOC6UDdVO0vomtq4IW+utIvRTAYibhWMTI1sNMuqtJwLJUD0eab6PHWFUjWJTHuaoRp41DctSpKYIGfSk+SMXOz59yhxbkhKJ+89Qbm6VSEVLWWZrr7zdwqbe2CSPWUSrolGLQK27DOs49TquKIzGBm5nee779L6yNbdcrFrdtmN6VUtQmAveecYH6T4YKBdoWMMCAwdEGOpwBJpO8t3DPA+G7nCv30TvMYz2yLJQBDAHvEwKyXnZzr5QCNfuL401VX4sEw1fcyYkcV0tEMKrbelxYZcZmFR9vGa/K8Sdpt8E+DQoDBVbK8Angj9mbn8hkeMpSPBYcPUvUCEWZf6e02/lo6nBIuchq0Pby8hSwhPyZSxpgnNWsinNLtBveKMrZTQccrRqnFnLCTMeKBvKCjidHq0Nz",
-    "expiration": "2026-06-16T06:11:12.000Z"
+    "access_key_id": "ASIAZV3A2ECZJXWHCILF",
+    "secret_access_key": "F61iAcztKnfdLMlCVEbNt4hF4FeVnRaeI4Vr2/tF",
+    "session_token": "IQoJb3JpZ2luX2VjEJv//////////wEaCXVzLWVhc3QtMSJHMEUCIQCdvJGxnsGSGzbyB4l5V6LTsqqg6ljoNZ0/yQ5ZQE/nGgIgSSkcLTkzkJNk1zgf8ZCVPiGg2ySnRsPiGoLblOcwW7cq9QMIZBAEGgw2NjUzODYwOTg4NjYiDAMDEditMMtVqqao9yrSA6IiH3C5NJZ3BCrn9nEmMPKYNM09GW1RGA19+IpAQw6f+u1D4+gQNcnE/S6FPCdh8lM8lLpepFxqpF80+0JyStLDPOc29SEdSOv6p+Fh7VHHK4zKP0MQxNq7xoM41+KXVz5jZzYUY/8N9wJqNBlq6USYfct4yO/aKaofoD+bOtq7yw4FuAuQnQ917z+t6LnSDuGiPdbNW8vwD+IH5FJLvJwhGzEjtTiR0ZfhX2fTYlwhC4FWWNJeMVakQSf0IYOL29/dWOmQoN9e2xAIv927T6lRmP/3HxszejuEDeFaw0It3fxU0Z5wcegEYD9H3p7/0w0eSS+klSf+gNos+ivw8jLdr8vuB0rVujpMcSTLgUi3NxM8C0HrgekcpNaDF9OwLGT7f1Y/RJDUXkPx4vBuIt1ZKxv69yKr8VW1G0t/sJbJEWmxMnGg6TccK4kDHL7Qole7cgfUieZ+LMZ85OArERxz3ravl4jodhmf2iia4Uxp51G53fCyPk1ocEUvz6knw3vO+lwGnbWpPXPMiWXUhXxMSvldyV4I0jXllHKyO13av62+/D+Mmi9/FojzvE57azn2IRx/Qfngz/f9Nr9F3FmHf2wjl4d/YLx4WRUmf10A9EYwg4rB0QY6nQFkEUgsRUTmv8QWzBeSCa3J3qiMiV596ZRqn+9Wyi5PnO46J5GB+4LgwFzj6Dfdd7kYiUReaa5/JbkQDO6wd/fMl7a8tqyr5k9XAx9JpWsaMjgP5nUfS056vW+k14y8206Ole2CrBjEyQPt0sXl0aQ3n4Psq2XiURbG/CKF92RNCRCNpTpVPUCy+H9tU9u0IXDPql7UUj/0jgnIFr3a",
+    "expiration": "2026-06-16T06:31:31.000Z"
   },
   "name": "eduorg-website",
   "path": "/home/ubuntu/eduorg-website",
